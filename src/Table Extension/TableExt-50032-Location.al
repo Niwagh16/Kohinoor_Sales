@@ -1,7 +1,9 @@
 tableextension 50032 "Location_ext" extends Location
 {
+
     fields
     {
+
         field(50000; "Global Dimension 1 Code"; Code[20])
         {
             CaptionClass = '1,1,1';
