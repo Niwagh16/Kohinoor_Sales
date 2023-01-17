@@ -7,6 +7,7 @@ pageextension 50031 "Item Card Ext1" extends "Item Card"
             field("Parent Item No."; Rec."Parent Item No.")
             {
                 ApplicationArea = all;
+
             }
         }
     }
