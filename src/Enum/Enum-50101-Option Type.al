@@ -1,4 +1,4 @@
-enum 50031 "Option Type"
+enum 50101 "Option Type"
 {
     Extensible = true;
 

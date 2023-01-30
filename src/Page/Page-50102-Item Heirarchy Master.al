@@ -1,4 +1,4 @@
-page 50035 "Item Heirarchy Master"
+page 50102 "Item Heirarchy Master"
 {
     PageType = List;
     ApplicationArea = All;
@@ -16,13 +16,14 @@ page 50035 "Item Heirarchy Master"
                 {
                     ToolTip = 'Specifies the value of the Code field.';
                 }
-                field(Description; Rec.Description)
-                {
-                    ToolTip = 'Specifies the value of the Description field.';
-                }
+
                 field("Option Type"; Rec."Option Type")
                 {
                     ToolTip = 'Specifies the value of the Option Type field.';
+                }
+                field(Description; Rec.Description)
+                {
+                    ToolTip = 'Specifies the value of the Description field.';
                 }
             }
 

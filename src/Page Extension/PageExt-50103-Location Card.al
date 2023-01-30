@@ -1,4 +1,4 @@
-Pageextension 50033 "Location card Ext1" extends "Location Card"
+Pageextension 50103 "Location card Ext1" extends "Location Card"
 {
     layout
     {

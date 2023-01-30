@@ -1,4 +1,4 @@
-tableextension 50035 "Gen. Journal Dim" extends "Gen. Journal Line"
+tableextension 50104 "Purchase Header Dim" extends "Purchase Header"
 {
     fields
     {
@@ -15,7 +15,7 @@ tableextension 50035 "Gen. Journal Dim" extends "Gen. Journal Line"
             end;
         }
     }
-    
+
     var
         myInt: Integer;
 }

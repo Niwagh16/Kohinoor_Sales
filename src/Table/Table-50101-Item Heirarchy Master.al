@@ -1,4 +1,4 @@
-table 50031 "Item Heirarchy Master"
+table 50101 "Item Heirarchy Master"
 {
     DataClassification = ToBeClassified;
 

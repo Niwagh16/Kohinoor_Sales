@@ -1,4 +1,4 @@
-tableextension 50036 "Item Journal Dim" extends "Item Journal Line"
+tableextension 50103 "Sales Header Dim" extends "Sales Header"
 {
     fields
     {

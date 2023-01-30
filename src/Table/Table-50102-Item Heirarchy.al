@@ -1,4 +1,4 @@
-table 50032 "Item heirarchy"
+table 50102 "Item heirarchy"
 {
     DataClassification = ToBeClassified;
 

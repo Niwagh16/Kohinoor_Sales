@@ -1,4 +1,4 @@
-tableextension 50034 "Purchase Header Dim" extends "Purchase Header"
+tableextension 50105 "Gen. Journal Dim" extends "Gen. Journal Line"
 {
     fields
     {

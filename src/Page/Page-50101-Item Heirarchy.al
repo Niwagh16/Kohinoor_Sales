@@ -1,4 +1,4 @@
-page 50034 "Item Heirarchy"
+page 50101 "Item Heirarchy"
 {
     PageType = List;
     ApplicationArea = All;
