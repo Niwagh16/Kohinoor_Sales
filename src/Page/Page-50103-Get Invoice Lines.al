@@ -331,34 +331,19 @@ page 50103 "Get Invoice Lines"
                 ItemGenJnl."Document No." := NoSeriesMgt.TryGetNextNo(ItemJnlBatch."No. Series", Today);
                 ItemGenJnl."Posting Date" := Today;
                 ItemGenJnl."Entry Type" := ItemGenJnl."Entry Type"::"Positive Adjmt.";
-                ItemGenJnl.Validate("Item No.", SalInvLine."No.");
-                ItemGenJnl.Validate("Location Code", SalInvLine."Location Code");
-                ItemGenJnl.Validate(Quantity, SalInvLine.Quantity);
                 IF ItemGenJnl.FindLast() then
                     ItemGenJnl."Line No." := ItemGenJnl."Line No." + 10000
                 else
                     ItemGenJnl."Line No." := 10000;
+
+                ItemGenJnl.Validate("Item No.", SalInvLine."No.");
+                ItemGenJnl.Validate("Location Code", SalInvLine."Location Code");
+                ItemGenJnl.Validate(Quantity, SalInvLine.Quantity);
                 ItemGenJnl.Validate("Unit of Measure Code", SalInvLine."Unit of Measure Code");
                 ItemGenJnl.Validate("Shortcut Dimension 1 Code", SalInvLine."Shortcut Dimension 1 Code");
                 ItemGenJnl.Validate("Shortcut Dimension 2 Code", SalInvLine."Shortcut Dimension 2 Code");
                 ItemGenJnl.insert;
-
-                ValueEntry.Reset;
-                ValueEntry.Setrange("Document No.", SalInvLine."Document No.");
-                ValueEntry.SetRange("Document Line No.", SalInvLine."Line No.");
-                if ValueEntry.FindSet() then
-                    repeat
-                        if ILE.GET(ValueEntry."Item Ledger Entry No.") then begin
-                            TrackSpec.Init;
-                            TrackSpec."Entry No." := ILE."Entry No.";
-                            TrackSpec.Validate("Item No.", ItemGenJnl."Item No.");
-                            TrackSpec.Validate("Lot No.", ILE."Lot No.");
-                            TrackSpec.Validate("Source Type", 83);
-                            TrackSpec.Validate("Quantity (Base)", ILE.Quantity);
-                            TrackSpec.Insert;
-                        end;
-                    until ValueEntry.Next = 0;
-
+                InsertTrackingSpecification(SalInvLine, ItemGenJnl); //For Create Tracking Specifications in Item Journal
                 ItemGenJnl.init;
                 ItemGenJnl."Journal Template Name" := 'ITEM';
                 ItemGenJnl."Journal Batch Name" := 'Default';
@@ -380,6 +365,30 @@ page 50103 "Get Invoice Lines"
             until SalInvLine.Next() = 0;
     end;
 
+    procedure InsertTrackingSpecification(var SalInvLine: Record "Sales Invoice Line"; var ItemGenJnl: Record "Item Journal Line")
+    var
+        ILE: Record "Item Ledger Entry";
+        TrackSpec: Record "Tracking Specification";
+        ValueEntry: record "Value Entry";
+    Begin
+        ValueEntry.Reset;
+        ValueEntry.Setrange("Document No.", SalInvLine."Document No.");
+        ValueEntry.SetRange("Document Line No.", SalInvLine."Line No.");
+        if ValueEntry.FindSet() then
+            repeat
+                if ILE.GET(ValueEntry."Item Ledger Entry No.") then begin
+                    TrackSpec.Init;
+                    if TrackSpec.FindLast() then
+                        TrackSpec."Entry No." := TrackSpec."Entry No." + 1;
+                    TrackSpec.Validate("Item No.", ItemGenJnl."Item No.");
+                    TrackSpec.Validate("Lot No.", ILE."Lot No.");
+                    Trackspec.Validate("Serial No.", ILE."Serial No.");
+                    TrackSpec.Validate("Source Type", 83);
+                    TrackSpec.Validate("Quantity (Base)", ILE.Quantity);
+                    TrackSpec.Insert;
+                end;
+            until ValueEntry.Next = 0;
+    End;
 
 }
 
