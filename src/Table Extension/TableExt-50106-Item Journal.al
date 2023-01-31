@@ -14,6 +14,10 @@ tableextension 50106 "Item Journal Dim" extends "Item Journal Line"
                 end;
             end;
         }
+        field(50101; "Sales Invoice No."; Code[20])
+        {
+            DataClassification = ToBeClassified;
+        }
     }
 
     var
