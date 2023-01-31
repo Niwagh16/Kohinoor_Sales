@@ -333,6 +333,10 @@ page 50103 "Get Invoice Lines"
                 ItemGenJnl.Validate("Item No.", SalInvLine."No.");
                 ItemGenJnl.Validate("Location Code", SalInvLine."Location Code");
                 ItemGenJnl.Validate(Quantity, SalInvLine.Quantity);
+                IF ItemGenJnl.FindLast() then
+                    ItemGenJnl."Line No." := ItemGenJnl."Line No." + 10000
+                else
+                    ItemGenJnl."Line No." := 10000;
                 ItemGenJnl.Validate("Unit of Measure Code", SalInvLine."Unit of Measure Code");
                 ItemGenJnl.Validate("Shortcut Dimension 1 Code", SalInvLine."Shortcut Dimension 1 Code");
                 ItemGenJnl.Validate("Shortcut Dimension 2 Code", SalInvLine."Shortcut Dimension 2 Code");
