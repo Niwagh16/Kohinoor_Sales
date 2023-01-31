@@ -336,7 +336,6 @@ page 50103 "Get Invoice Lines"
                 ItemGenJnl.Validate("Unit of Measure Code", SalInvLine."Unit of Measure Code");
                 ItemGenJnl.Validate("Shortcut Dimension 1 Code", SalInvLine."Shortcut Dimension 1 Code");
                 ItemGenJnl.Validate("Shortcut Dimension 2 Code", SalInvLine."Shortcut Dimension 2 Code");
-                ItemGenJnl.Validate("Sales Invoice No.", SalInvLine."Document No.");
                 ItemGenJnl.insert;
             until SalInvLine.Next() = 0;
     end;

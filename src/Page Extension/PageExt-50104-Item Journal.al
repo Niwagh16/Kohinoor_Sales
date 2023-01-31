@@ -2,13 +2,6 @@ pageextension 50104 "Item Journal Ext" extends "Item Journal"
 {
     layout
     {
-        addafter("Shortcut Dimension 2 Code")
-        {
-            field("Sales Invoice No."; Rec."Sales Invoice No.")
-            {
-                ApplicationArea = All;
-            }
-        }
     }
 
     actions
