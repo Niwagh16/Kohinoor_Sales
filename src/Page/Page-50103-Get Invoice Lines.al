@@ -385,6 +385,12 @@ page 50103 "Get Invoice Lines"
                     Trackspec.Validate("Serial No.", ILE."Serial No.");
                     TrackSpec.Validate("Source Type", 83);
                     TrackSpec.Validate("Quantity (Base)", ILE.Quantity);
+                    TrackSpec.Validate(Positive, false);
+                    TrackSpec.Validate("Prohibit Cancellation", false);
+                    TrackSpec.Validate(Correction, false);
+                    TrackSpec.Validate("Buffer Status2", TrackSpec."Buffer Status2"::"ExpDate blocked");
+                    TrackSpec.Validate("Item Ledger Entry No.", ILE."Entry No.");
+                    TrackSpec.Validate("Source ID", 'ITEM');
                     TrackSpec.Insert;
                 end;
             until ValueEntry.Next = 0;
