@@ -25,7 +25,7 @@ table 50101 "Item Heirarchy Master"
 
     keys
     {
-        key(Key1; Code)
+        key(Key1; Code, "Option Type")
         {
             Clustered = true;
         }
