@@ -12,42 +12,41 @@ page 50101 "Item Heirarchy"
             repeater(control001)
             {
 
-
-                field(A; Rec.A)
-                {
-                    ToolTip = 'Specifies the value of the A field.';
-                }
-                field(B; Rec.B)
-                {
-                    ToolTip = 'Specifies the value of the B field.';
-                }
-                field(C; Rec.C)
-                {
-                    ToolTip = 'Specifies the value of the C field.';
-                }
-                field(D; Rec.D)
-                {
-                    ToolTip = 'Specifies the value of the D field.';
-                }
-                field(E; Rec.E)
-                {
-                    ToolTip = 'Specifies the value of the E field.';
-                }
-                field(F; Rec.F)
-                {
-                    ToolTip = 'Specifies the value of the F field.';
-                }
-                field(G; Rec.G)
-                {
-                    ToolTip = 'Specifies the value of the G field.';
-                }
-                field(H; Rec.H)
-                {
-                    ToolTip = 'Specifies the value of the H field.';
-                }
                 field(SystemCreatedAt; Rec.SystemCreatedAt)
                 {
                     ToolTip = 'Specifies the value of the SystemCreatedAt field.';
+                }
+                field("Category 1"; Rec."Category 1")
+                {
+                    ToolTip = 'Specifies the value of the Category 1 field.';
+                }
+                field("Category 2"; Rec."Category 2")
+                {
+                    ToolTip = 'Specifies the value of the Category 2 field.';
+                }
+                field("Category 3"; Rec."Category 3")
+                {
+                    ToolTip = 'Specifies the value of the Category 3 field.';
+                }
+                field("Category 4"; Rec."Category 4")
+                {
+                    ToolTip = 'Specifies the value of the Category 4 field.';
+                }
+                field("Category 5"; Rec."Category 5")
+                {
+                    ToolTip = 'Specifies the value of the Category 5 field.';
+                }
+                field("Category 6"; Rec."Category 6")
+                {
+                    ToolTip = 'Specifies the value of the Category 6 field.';
+                }
+                field("Category 7"; Rec."Category 7")
+                {
+                    ToolTip = 'Specifies the value of the Category 7 field.';
+                }
+                field("Category 8"; Rec."Category 8")
+                {
+                    ToolTip = 'Specifies the value of the Category 8 field.';
                 }
                 field(SystemCreatedBy; Rec.SystemCreatedBy)
                 {

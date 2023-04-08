@@ -14,6 +14,11 @@ tableextension 50103 "Sales Header Dim" extends "Sales Header"
                 end;
             end;
         }
+        field(50000; "Pro-forma Invoice"; Boolean)
+        {
+            DataClassification = ToBeClassified;
+            Description = 'PCPL-064';
+        }
     }
 
     var

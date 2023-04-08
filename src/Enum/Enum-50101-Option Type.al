@@ -2,28 +2,28 @@ enum 50101 "Option Type"
 {
     Extensible = true;
 
-    value(0; "A")
+    value(0; "Category 1")
     {
     }
-    value(1; "B")
+    value(1; "Category 2")
     {
     }
-    value(3; "C")
+    value(3; "Category 3")
     {
     }
-    value(4; "D")
+    value(4; "Category 4")
     {
     }
-    value(5; "E")
+    value(5; "Category 5")
     {
     }
-    value(6; "F")
+    value(6; "Category 6")
     {
     }
-    value(7; "G")
+    value(7; "Category 7")
     {
     }
-    value(8; "H")
+    value(8; "Category 8")
     {
     }
 }
