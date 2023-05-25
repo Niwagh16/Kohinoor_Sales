@@ -11,6 +11,7 @@ pageextension 50104 "Item Journal Ext" extends "Item Journal"
             action("Get Invoice Lines")
             {
                 Caption = 'Get Invoice Lines';
+                ApplicationArea = all;
                 Image = GetLines;
                 PromotedIsBig = true;
                 Promoted = true;

@@ -55,7 +55,7 @@ pageextension 50101 "Item Card Ext1" extends "Item Card"
 
     actions
     {
-        // Add changes to page actions here
+       
     }
 
     var

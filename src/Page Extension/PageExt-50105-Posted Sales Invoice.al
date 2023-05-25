@@ -14,6 +14,7 @@ pageextension 50105 Posted_Sales_Invoice_Ext extends "Posted Sales Invoice"
                 Promoted = true;
                 Image = Print;
                 ApplicationArea = all;
+                PromotedCategory = Report;
                 trigger OnAction()
                 var
                     SIH: Record "Sales Invoice Header";
