@@ -318,25 +318,31 @@ page 50103 "Get Invoice Lines"
         ILE: Record "Item Ledger Entry";
         TrackSpec: Record "Tracking Specification";
         ValueEntry: record "Value Entry";
+        Text000: Label 'Lines Counting to ------ #1';
+        ItemJ: Record "Item Journal Line";
     begin
-
+        LineCount := 0;
+        Window.Open(Text000, LineCount);
         IF SalInvLine.FindSet() then
             repeat
                 LineCount := LineCount + 1;
-                Window.UPDATE(1, LineCount);
+                Window.UPDATE();
                 ItemGenJnl.init;
                 ItemGenJnl."Journal Template Name" := 'ITEM';
                 ItemGenJnl."Journal Batch Name" := 'Default';
-                ItemJnlBatch.Get(ItemGenJnl."Journal Template Name", ItemGenJnl."Journal Batch Name");
-                ItemGenJnl."Document No." := NoSeriesMgt.TryGetNextNo(ItemJnlBatch."No. Series", Today);
-                ItemGenJnl."Posting Date" := Today;
-                ItemGenJnl."Entry Type" := ItemGenJnl."Entry Type"::"Positive Adjmt.";
-                IF ItemGenJnl.FindLast() then
-                    ItemGenJnl."Line No." := ItemGenJnl."Line No." + 10000
+                ItemJ.Reset();
+                ItemJ.SetRange("Journal Template Name", 'ITEM');
+                ItemJ.SetRange("Journal Batch Name", 'Default');
+                IF ItemJ.FindLast() then
+                    ItemGenJnl."Line No." := ItemJ."Line No." + 10000
                 else
                     ItemGenJnl."Line No." := 10000;
 
+                ItemGenJnl."Document No." := SalInvLine."Document No.";
+                ItemGenJnl.validate("Posting Date", Today);
+                ItemGenJnl."Entry Type" := ItemGenJnl."Entry Type"::"Positive Adjmt.";
                 ItemGenJnl.Validate("Item No.", SalInvLine."No.");
+                //ItemGenJnl.Validate("Bin Code", 'BACKPACK');
                 ItemGenJnl.Validate("Location Code", SalInvLine."Location Code");
                 ItemGenJnl.Validate(Quantity, SalInvLine.Quantity);
                 ItemGenJnl.Validate("Unit of Measure Code", SalInvLine."Unit of Measure Code");
@@ -344,56 +350,89 @@ page 50103 "Get Invoice Lines"
                 ItemGenJnl.Validate("Shortcut Dimension 2 Code", SalInvLine."Shortcut Dimension 2 Code");
                 ItemGenJnl.insert;
                 InsertTrackingSpecification(SalInvLine, ItemGenJnl); //For Create Tracking Specifications in Item Journal
+                //*********************Negative Adjust Entry Creation******************************
                 ItemGenJnl.init;
                 ItemGenJnl."Journal Template Name" := 'ITEM';
                 ItemGenJnl."Journal Batch Name" := 'Default';
-                ItemJnlBatch.Get(ItemGenJnl."Journal Template Name", ItemGenJnl."Journal Batch Name");
-                ItemGenJnl."Document No." := NoSeriesMgt.TryGetNextNo(ItemJnlBatch."No. Series", Today);
-                ItemGenJnl."Posting Date" := Today;
-                ItemGenJnl."Entry Type" := ItemGenJnl."Entry Type"::"Negative Adjmt.";
-                ItemGenJnl.Validate("Item No.", SalInvLine."No.");
-                ItemGenJnl.Validate("Location Code", SalInvLine."Location Code");
-                ItemGenJnl.Validate(Quantity, SalInvLine.Quantity);
-                IF ItemGenJnl.FindLast() then
-                    ItemGenJnl."Line No." := ItemGenJnl."Line No." + 10000
+                ItemJ.Reset();
+                ItemJ.SetRange("Journal Template Name", 'ITEM');
+                ItemJ.SetRange("Journal Batch Name", 'Default');
+                IF ItemJ.FindLast() then
+                    ItemGenJnl."Line No." := ItemJ."Line No." + 10000
                 else
                     ItemGenJnl."Line No." := 10000;
+
+                ItemGenJnl."Document No." := SalInvLine."Document No.";
+                ItemGenJnl.validate("Posting Date", Today);
+                ItemGenJnl."Entry Type" := ItemGenJnl."Entry Type"::"Negative Adjmt.";
+                ItemGenJnl.Validate("Item No.", SalInvLine."No.");
+                //ItemGenJnl.Validate("Bin Code", 'BACKPACK');
+                ItemGenJnl.Validate("Location Code", SalInvLine."Location Code");
+                ItemGenJnl.Validate(Quantity, SalInvLine.Quantity);
                 ItemGenJnl.Validate("Unit of Measure Code", SalInvLine."Unit of Measure Code");
                 ItemGenJnl.Validate("Shortcut Dimension 1 Code", SalInvLine."Shortcut Dimension 1 Code");
                 ItemGenJnl.Validate("Shortcut Dimension 2 Code", SalInvLine."Shortcut Dimension 2 Code");
                 ItemGenJnl.insert;
             until SalInvLine.Next() = 0;
+        Window.Close();
     end;
 
     procedure InsertTrackingSpecification(var SalInvLine: Record "Sales Invoice Line"; var ItemGenJnl: Record "Item Journal Line")
     var
         ILE: Record "Item Ledger Entry";
-        TrackSpec: Record "Tracking Specification";
+        ReservEntry: Record "Reservation Entry";
         ValueEntry: record "Value Entry";
+        ReservEntryInit: Record "Reservation Entry";
     Begin
+
         ValueEntry.Reset;
         ValueEntry.Setrange("Document No.", SalInvLine."Document No.");
         ValueEntry.SetRange("Document Line No.", SalInvLine."Line No.");
         if ValueEntry.FindSet() then
             repeat
                 if ILE.GET(ValueEntry."Item Ledger Entry No.") then begin
-                    TrackSpec.Init;
-                    if TrackSpec.FindLast() then
-                        TrackSpec."Entry No." := TrackSpec."Entry No." + 1;
-                    TrackSpec.Validate("Item No.", ItemGenJnl."Item No.");
-                    TrackSpec.Validate("Lot No.", ILE."Lot No.");
-                    Trackspec.Validate("Serial No.", ILE."Serial No.");
-                    TrackSpec.Validate("Source Type", 83);
-                    TrackSpec.Validate("Quantity (Base)", ILE.Quantity);
-                    TrackSpec.Validate(Positive, false);
-                    TrackSpec.Validate("Prohibit Cancellation", false);
-                    TrackSpec.Validate(Correction, false);
-                    TrackSpec.Validate("Buffer Status2", TrackSpec."Buffer Status2"::"ExpDate blocked");
-                    TrackSpec.Validate("Item Ledger Entry No.", ILE."Entry No.");
-                    TrackSpec.Validate("Source ID", 'ITEM');
-                    TrackSpec.Insert;
+                    ReservEntry.Reset();
+                    ReservEntry.LockTable();
+                    if ReservEntry.FindLast() then;
+                    ReservEntryInit.Init();
+                    ReservEntryInit."Entry No." := ReservEntry."Entry No." + 1;
+                    ReservEntryInit."Item No." := ItemGenJnl."Item No.";
+                    ReservEntryInit."Location Code" := ItemGenJnl."Location Code";
+                    ReservEntryInit.validate("Quantity (Base)", SalInvLine.Quantity);
+                    ReservEntryInit."Reservation Status" := ReservEntryInit."Reservation Status"::Prospect;
+                    ReservEntryInit."Source Type" := DATABASE::"Item Journal Line";
+                    ReservEntryInit."Source Subtype" := 2;
+                    ReservEntryInit."Source ID" := ItemGenJnl."Journal Template Name";
+                    ReservEntryInit."Source Batch Name" := ItemGenJnl."Journal Batch Name";
+                    ReservEntryInit."Source Ref. No." := ItemGenJnl."Line No.";
+                    ReservEntryInit."Creation Date" := Today;
+                    ReservEntryInit."Created By" := UserId;
+                    ReservEntryInit."Serial No." := ILE."Serial No.";
+                    ReservEntryInit."Expected Receipt Date" := Today;
+                    ReservEntryInit.Positive := true;
+                    ReservEntryInit."Item Tracking" := ReservEntryInit."Item Tracking"::"Serial No.";
+                    ReservEntryInit.Insert();
+
+                    // TrackSpec.Init;
+                    // if TrackSpec.FindLast() then
+                    //     TrackSpec."Entry No." := TrackSpec."Entry No." + 1;
+                    // TrackSpec.Validate("Item No.", ItemGenJnl."Item No.");
+                    // // TrackSpec.Validate("Lot No.", ILE."Lot No.");
+                    // //Trackspec.Validate("Serial No.", ILE."Serial No.");
+                    // Trackspec."Serial No." := ILE."Serial No.";
+                    // TrackSpec.Validate("Source Type", 83);
+                    // TrackSpec.Validate("Quantity (Base)", ILE.Quantity);
+                    // TrackSpec.Validate(Positive, false);
+                    // TrackSpec.Validate("Prohibit Cancellation", false);
+                    // TrackSpec.Validate(Correction, false);
+                    // TrackSpec.Validate("Buffer Status2", TrackSpec."Buffer Status2"::"ExpDate blocked");
+                    // TrackSpec.Validate("Item Ledger Entry No.", ILE."Entry No.");
+                    // TrackSpec.Validate("Source ID", 'ITEM');
+                    // TrackSpec.Insert;
                 end;
             until ValueEntry.Next = 0;
+
+
     End;
 
 }
