@@ -1,4 +1,4 @@
-permissionset 50101 GeneratedPermSales
+permissionset 50101 GeneratedPermiSales
 {
     Assignable = true;
     Permissions = tabledata "Item Heirarchy Master"=RIMD,

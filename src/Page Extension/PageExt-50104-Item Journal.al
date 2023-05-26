@@ -17,7 +17,8 @@ pageextension 50104 "Item Journal Ext" extends "Item Journal"
                 Promoted = true;
                 trigger OnAction()
                 begin
-                    GetInvoiceLine();
+                    IF Confirm('Do you want fatch the sales invoice line', true) then
+                        GetInvoiceLine();
                 end;
             }
         }
