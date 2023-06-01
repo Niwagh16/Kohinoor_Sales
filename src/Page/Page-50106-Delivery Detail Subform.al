@@ -20,6 +20,11 @@ page 50106 "Delivery Detail Subform"
                 {
                     ToolTip = 'Specifies the value of the Delivery Date field.';
                 }
+                field("Invoice No."; Rec."Invoice No.")
+                {
+                    ToolTip = 'Specifies the value of the Invoice No. field.';
+                }
+
                 field("Customer No."; Rec."Customer No.")
                 {
                     ToolTip = 'Specifies the value of the Customer No. field.';
@@ -43,6 +48,14 @@ page 50106 "Delivery Detail Subform"
                 field(Quantity; Rec.Quantity)
                 {
                     ToolTip = 'Specifies the value of the Quantity field.';
+                }
+                field(Warehouse; Rec.Warehouse)
+                {
+                    ToolTip = 'Specifies the value of the Warehouse field.';
+                }
+                field("Store Name"; Rec."Store Name")
+                {
+                    ToolTip = 'Specifies the value of the Store Name field.';
                 }
                 field("Delivery Address"; Rec."Delivery Address")
                 {

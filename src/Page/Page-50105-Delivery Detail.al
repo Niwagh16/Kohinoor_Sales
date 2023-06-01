@@ -72,6 +72,7 @@ page 50105 "Delivery Detail"
     procedure GetInvoiceLine()
     var
         GetInvoiceLineDelivery: page "Get Invoice Lines Delivery";
+
         SalesInvLine: Record 113;
     Begin
         SalesInvLine.SetCurrentKey("Document No.");
