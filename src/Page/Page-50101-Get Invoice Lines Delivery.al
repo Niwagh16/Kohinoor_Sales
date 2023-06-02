@@ -327,14 +327,22 @@ page 50101 "Get Invoice Lines Delivery"
         SalInvHdr: Record 112;
         Text001: Label 'Inserted lines             #1######';
         RecLoc: Record 14;
+        DeliveryLines: Record "Delivery Line";
 
 
     begin
+
         LineCount := 0;
-        //Window.Open(Text000, LineCount);
         Window.OPEN(Text000 + Text001);
         IF SalInvLine.FindSet() then
             repeat
+                //********************Validation for Already selected lines will not select agin for other delivery******
+                DeliveryLines.Reset();
+                DeliveryLines.SetRange("Invoice No.", SalInvLine."Document No.");
+                DeliveryLines.SetRange("Invoice Line No.", SalInvLine."Line No.");
+                IF DeliveryLines.FindFirst() then
+                    Error('Selected Invoice No. %1 is already selected for %2 delivery challan no.', DeliveryLines."Invoice No.", DeliveryLines."Delivery Challan No.");
+
                 LineCount := LineCount + 1;
                 Window.UPDATE(1, LineCount);
                 DelLine.Init();
@@ -354,6 +362,7 @@ page 50101 "Get Invoice Lines Delivery"
                 DelLine.Quantity := SalInvLine.Quantity;
                 DelLine.Warehouse := SalInvLine."Location Code";
                 DelLine."Invoice No." := SalInvLine."Document No.";
+                DelLine."Invoice Line No." := SalInvLine."Line No.";
                 DelLine."Store Name" := SalInvLine."Shortcut Dimension 2 Code";
                 IF SalInvHdr.get(SalInvLine."Document No.") then begin
                     DelLine."Delivery Address" := SalInvHdr."Ship-to Address";
@@ -361,7 +370,7 @@ page 50101 "Get Invoice Lines Delivery"
                 end;
                 DelLine.Insert();
             until SalInvLine.Next() = 0;
-        // Window.Close();
+        //Window.Close();
     end;
 }
 

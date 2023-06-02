@@ -1,14 +1,12 @@
-page 50106 "Delivery Detail Subform"
+page 50109 "Posted Delivery Subform"
 {
     ApplicationArea = All;
-    Caption = 'Delivery Detail Subform';
+    Caption = 'Posted Delivery Subform';
     PageType = ListPart;
-    SourceTable = "Delivery Line";
+    SourceTable = "Posted Delivery Line";
     AutoSplitKey = true;
-    DelayedInsert = true;
+    Editable = false;
     LinksAllowed = false;
-    MultipleNewLines = true;
-
 
     layout
     {
@@ -16,20 +14,10 @@ page 50106 "Delivery Detail Subform"
         {
             repeater(General)
             {
-                field("Line No."; Rec."Line No.")
-                {
-                    ToolTip = 'Specifies the value of the Line No. field.';
-                    Editable = false;
-                }
-                field("Delivery Date"; Rec."Delivery Date")
-                {
-                    ToolTip = 'Specifies the value of the Delivery Date field.';
-                }
                 field("Invoice No."; Rec."Invoice No.")
                 {
                     ToolTip = 'Specifies the value of the Invoice No. field.';
                 }
-
                 field("Customer No."; Rec."Customer No.")
                 {
                     ToolTip = 'Specifies the value of the Customer No. field.';
@@ -74,7 +62,6 @@ page 50106 "Delivery Detail Subform"
                 {
                     ToolTip = 'Specifies the value of the Remarks field.';
                 }
-
             }
         }
     }

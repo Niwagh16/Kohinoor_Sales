@@ -3,7 +3,7 @@ pageextension 50106 Sales_Order_Ext extends "Sales Order"
     layout
     {
 
-        // Add changes to page layout here
+
     }
 
     actions

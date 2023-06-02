@@ -31,6 +31,14 @@ table 50102 "Delivery Header"
         {
             Caption = 'Driver Contact No.';
             DataClassification = ToBeClassified;
+            trigger OnValidate()
+            var
+                Cnt: Integer;
+            begin
+                Cnt := StrLen("Driver Contact No.");
+                IF (Cnt > 10) OR (Cnt < 10) then
+                    Error('Phone No. required 10 digit only.');
+            end;
         }
         field(5; "Vehicle No."; Text[20])
         {
@@ -47,6 +55,18 @@ table 50102 "Delivery Header"
             Caption = 'No. Series';
             TableRelation = "No. Series";
         }
+        field(8; "Delivery Boy Contact"; Text[30])
+        {
+            DataClassification = ToBeClassified;
+            trigger OnValidate()
+            var
+                Cnt: Integer;
+            begin
+                Cnt := StrLen("Delivery Boy Contact");
+                IF (Cnt > 10) OR (Cnt < 10) then
+                    Error('Phone No. required 10 digit only.');
+            end;
+        }
 
     }
     keys
@@ -56,6 +76,23 @@ table 50102 "Delivery Header"
             Clustered = true;
         }
     }
+    trigger OnInsert()
+    begin
+        IF Rec."Delivery Challan No." = '' then
+            rec.TestField("Delivery Challan No.");
+    end;
+
+    trigger OnDelete()
+    var
+        DelLine: Record "Delivery Line";
+    begin
+        DelLine.Reset();
+        DelLine.SetRange("Delivery Challan No.", "Delivery Challan No.");
+        IF DelLine.FindSet() then
+            repeat
+                DelLine.Delete();
+            until DelLine.Next() = 0;
+    end;
 
     local procedure GetNoSeriesCode(): Code[20]
     var

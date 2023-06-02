@@ -42,6 +42,10 @@ page 50105 "Delivery Detail"
                 {
                     ToolTip = 'Specifies the value of the Delivery Boy field.';
                 }
+                field("Delivery Boy Contact"; Rec."Delivery Boy Contact")
+                {
+                    ToolTip = 'Specifies the value of the Delivery Boy Contact field.';
+                }
             }
             part(Lines; "Delivery Detail Subform")
             {
@@ -67,8 +71,57 @@ page 50105 "Delivery Detail"
                     GetInvoiceLine();
                 end;
             }
+            action(Post)
+            {
+                ApplicationArea = all;
+                Caption = 'Post';
+                Image = PostOrder;
+                ShortCutKey = 'F9';
+                trigger OnAction()
+                var
+                begin
+                    IF Confirm('Do you want to post the order', true) then
+                        PostOrder(Rec);
+                end;
+            }
+
         }
     }
+    local procedure PostOrder(DelHdr: Record "Delivery Header")
+    var
+        PostedDH: Record "Posted Delivery Header";
+        DelLine: Record "Delivery Line";
+        PostedDL: Record "Posted Delivery Line";
+        Window: Dialog;
+        Counter: Integer;
+        PostingLinesMsg: Label 'Posting Invoive lines       #2######\', Comment = 'Counter';
+    begin
+        Window.Open(
+                    '#1#################################\\' +
+                    PostingLinesMsg);
+        //Window.Update(1, StrSubstNo('%1 %2', SalesHeader."Document Type", SalesHeader."No."));
+        DelHdr.Reset();
+        DelHdr.SetRange("Delivery Challan No.", Rec."Delivery Challan No.");
+        IF DelHdr.FindFirst() then begin
+            PostedDH.Init();
+            PostedDH.TransferFields(DelHdr);
+            PostedDH.Insert();
+
+            DelLine.Reset();
+            DelLine.SetRange("Delivery Challan No.", rec."Delivery Challan No.");
+            if DelLine.FindSet() then
+                repeat
+                    PostedDL.Init();
+                    PostedDL.TransferFields(DelLine);
+                    PostedDL.Insert();
+                    Sleep(50);
+                    Window.Update(2, DelLine."Invoice No.");
+                until DelLine.Next() = 0;
+        end;
+        Message('Entry Posted......');
+        CurrPage.Close();
+    end;
+
     procedure GetInvoiceLine()
     var
         GetInvoiceLineDelivery: page "Get Invoice Lines Delivery";
@@ -76,6 +129,7 @@ page 50105 "Delivery Detail"
         SalesInvLine: Record 113;
     Begin
         SalesInvLine.SetCurrentKey("Document No.");
+        SalesInvLine.SetRange(Delivered, false);
         SalesInvLine.SetRange(Type, SalesInvLine.Type::Item);
         SalesInvLine.SetFilter(Quantity, '<>%1', 0);
         GetInvoiceLineDelivery.SetTableView(SalesInvLine);

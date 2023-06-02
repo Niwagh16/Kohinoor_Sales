@@ -1,7 +1,8 @@
-table 50103 "Delivery Line"
+table 50105 "Posted Delivery Line"
 {
-    Caption = 'Delivery Line';
+    Caption = 'Posted Delivery Line';
     DataClassification = ToBeClassified;
+    Permissions = tabledata "Sales Invoice Line" = RM;
 
     fields
     {
@@ -28,15 +29,7 @@ table 50103 "Delivery Line"
             Caption = 'Customer No.';
             DataClassification = ToBeClassified;
             Editable = false;
-            trigger OnValidate()
-            var
-                Cust: Record 18;
-            begin
-                IF Cust.get("Customer No.") then begin
-                    "Customer Name" := Cust.Name;
-                    "Customer Phone No." := Cust."Phone No.";
-                end;
-            end;
+
         }
         field(5; "Customer Name"; Text[100])
         {
@@ -107,6 +100,24 @@ table 50103 "Delivery Line"
         {
             DataClassification = ToBeClassified;
             Editable = false;
+        }
+        field(17; Delivered; Boolean)
+        {
+            DataClassification = ToBeClassified;
+            trigger OnValidate()
+            var
+                SalInvLine: Record "Sales Invoice Line";
+            begin
+                If Rec.Delivered = true then begin
+                    SalInvLine.Reset();
+                    SalInvLine.SetRange("Document No.", "Invoice No.");
+                    SalInvLine.SetRange("Line No.", "Invoice Line No.");
+                    if SalInvLine.FindFirst() then begin
+                        SalInvLine.Delivered := true;
+                        SalInvLine.Modify();
+                    end;
+                end;
+            end;
         }
 
     }
