@@ -337,11 +337,11 @@ page 50101 "Get Invoice Lines Delivery"
         IF SalInvLine.FindSet() then
             repeat
                 //********************Validation for Already selected lines will not select agin for other delivery******
-                DeliveryLines.Reset();
-                DeliveryLines.SetRange("Invoice No.", SalInvLine."Document No.");
-                DeliveryLines.SetRange("Invoice Line No.", SalInvLine."Line No.");
-                IF DeliveryLines.FindFirst() then
-                    Error('Selected Invoice No. %1 is already selected for %2 delivery challan no.', DeliveryLines."Invoice No.", DeliveryLines."Delivery Challan No.");
+                // DeliveryLines.Reset();
+                // DeliveryLines.SetRange("Invoice No.", SalInvLine."Document No.");
+                // DeliveryLines.SetRange("Invoice Line No.", SalInvLine."Line No.");
+                // IF DeliveryLines.FindFirst() then
+                //     Error('Selected Invoice No. %1 is already selected for %2 delivery challan no.', DeliveryLines."Invoice No.", DeliveryLines."Delivery Challan No.");
 
                 LineCount := LineCount + 1;
                 Window.UPDATE(1, LineCount);

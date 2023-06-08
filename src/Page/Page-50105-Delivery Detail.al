@@ -119,8 +119,30 @@ page 50105 "Delivery Detail"
                 until DelLine.Next() = 0;
         end;
         Message('Entry Posted......');
+        if InstructionMgt.IsEnabled(InstructionMgt.ShowPostedConfirmationMessageCode()) then
+            ShowPostedConfirmationMessage(PostedDL."Delivery Challan No.");
         CurrPage.Close();
     end;
+
+    var
+
+        InstructionMgt: Codeunit "Instruction Mgt.";
+        OpenPostedSalesOrderQst: Label 'The Posted Delivery Order is Created as number %1 .\\Do you want to open the Posted Delivery Order?', Comment = '%1 = posted document number';
+
+    local procedure ShowPostedConfirmationMessage(DelChalNo: code[20])
+    var
+        PostedDeliveryDetail: Record "Posted Delivery Header";
+        InstructionMgt: Codeunit "Instruction Mgt.";
+    begin
+
+        PostedDeliveryDetail.SetRange("Delivery Challan No.", DelChalNo);
+        if PostedDeliveryDetail.FindFirst() then
+            if InstructionMgt.ShowConfirm(StrSubstNo(OpenPostedSalesOrderQst, PostedDeliveryDetail."Delivery Challan No."),
+                 InstructionMgt.ShowPostedConfirmationMessageCode())
+            then
+                InstructionMgt.ShowPostedDocument(PostedDeliveryDetail, Page::"Posted delivery Detail");
+    end;
+
 
     procedure GetInvoiceLine()
     var

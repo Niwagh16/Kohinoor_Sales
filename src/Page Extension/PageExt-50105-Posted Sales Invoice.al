@@ -22,7 +22,7 @@ pageextension 50105 Posted_Sales_Invoice_Ext extends "Posted Sales Invoice"
                     SIH.Reset();
                     SIH.SetRange("No.", rec."No.");
                     if SIH.FindFirst() then
-                        Report.RunModal(50000, true, false, SIH);
+                        Report.RunModal(50310, true, false, SIH);
                 end;
             }
         }

@@ -30,7 +30,7 @@ pageextension 50107 Sales_Quote_Ext extends "Sales Quote"
                     SH.SetRange("No.", rec."No.");
                     if SH.FindFirst() then //begin
                         // SH.Modify();
-                        Report.RunModal(50001, true, false, SH);
+                        Report.RunModal(50311, true, false, SH);
                     //end;
                 end;
             }

@@ -23,7 +23,7 @@ pageextension 50106 Sales_Order_Ext extends "Sales Order"
                     SH.Reset();
                     SH.SetRange("No.", rec."No.");
                     if SH.FindFirst() then
-                        Report.RunModal(50001, true, false, SH);
+                        Report.RunModal(50311, true, false, SH);
                     // SH.Modify();
                 end;
             }
