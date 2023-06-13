@@ -83,7 +83,7 @@ page 50110 "Delivery Status Update"
             {
                 Caption = 'Submit for Delivered';
                 Image = Delivery;
-                PromotedCategory = New;
+                PromotedCategory = Process;
                 PromotedIsBig = true;
                 Promoted = true;
                 PromotedOnly = true;
@@ -97,6 +97,8 @@ page 50110 "Delivery Status Update"
                     if PDL.FindSet() then
                         repeat
                             PDL.Validate(Delivered, true);
+                            PDL."Delivered by" := UserId;
+                            PDL."Delivered Date" := Today;
                             PDl.Modify();
                         until pdl.Next() = 0;
                     Message('Delivery Status Updated successfully for selected lines.');

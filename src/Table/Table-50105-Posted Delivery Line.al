@@ -119,6 +119,17 @@ table 50105 "Posted Delivery Line"
                 end;
             end;
         }
+        field(18; "Delivered Date"; Date)
+        {
+            DataClassification = ToBeClassified;
+            Editable = false;
+        }
+        field(19; "Delivered by"; code[50])
+        {
+            DataClassification = ToBeClassified;
+            TableRelation = "User Setup"."User ID";
+            Editable = false;
+        }
 
     }
     keys
@@ -128,5 +139,6 @@ table 50105 "Posted Delivery Line"
             Clustered = true;
         }
     }
+    var
 
 }
