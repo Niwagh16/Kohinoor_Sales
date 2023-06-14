@@ -1,7 +1,7 @@
 page 50108 "Posted delivery Detail"
 {
     ApplicationArea = All;
-    Caption = 'Posted delivery Detail';
+    Caption = 'Posted Dispatch Detail';
     PageType = Card;
     SourceTable = "Posted Delivery Header";
     RefreshOnActivate = true;

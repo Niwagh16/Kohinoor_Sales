@@ -1,7 +1,7 @@
 page 50105 "Delivery Detail"
 {
     ApplicationArea = All;
-    Caption = 'Delivery Detail';
+    Caption = 'Dispatch Detail';
     PageType = Card;
     SourceTable = "Delivery Header";
 
@@ -113,6 +113,7 @@ page 50105 "Delivery Detail"
                 repeat
                     PostedDL.Init();
                     PostedDL.TransferFields(DelLine);
+                    PostedDL.Posted := true;
                     PostedDL.Insert();
                     Sleep(50);
                     Window.Update(2, DelLine."Invoice No.");
@@ -151,6 +152,7 @@ page 50105 "Delivery Detail"
         SalesInvLine: Record 113;
     Begin
         SalesInvLine.SetCurrentKey("Document No.");
+        SalesInvLine.SetRange(Demo, true);
         SalesInvLine.SetRange(Delivered, false);
         SalesInvLine.SetRange(Type, SalesInvLine.Type::Item);
         SalesInvLine.SetFilter(Quantity, '<>%1', 0);

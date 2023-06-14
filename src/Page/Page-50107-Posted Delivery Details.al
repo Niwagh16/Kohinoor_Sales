@@ -1,7 +1,7 @@
 page 50107 "Posted Delivery Details"
 {
     ApplicationArea = All;
-    Caption = 'Posted Delivery Details';
+    Caption = 'Posted Dispatch Details';
     PageType = List;
     SourceTable = "Posted Delivery Header";
     UsageCategory = History;

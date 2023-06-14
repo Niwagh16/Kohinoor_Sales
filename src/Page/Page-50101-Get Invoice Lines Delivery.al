@@ -328,6 +328,7 @@ page 50101 "Get Invoice Lines Delivery"
         Text001: Label 'Inserted lines             #1######';
         RecLoc: Record 14;
         DeliveryLines: Record "Delivery Line";
+        PostedDL: Record "Posted Delivery Line";
 
 
     begin
@@ -343,7 +344,11 @@ page 50101 "Get Invoice Lines Delivery"
                 IF DeliveryLines.FindFirst() then
                     Error('Selected Invoice No. %1 is already selected for %2 delivery challan no.', DeliveryLines."Invoice No.", DeliveryLines."Delivery Challan No.");
 
-
+                PostedDL.Reset();
+                PostedDL.SetRange("Invoice No.", SalInvLine."Document No.");
+                PostedDL.SetRange("Invoice Line No.", SalInvLine."Line No.");
+                IF PostedDL.FindFirst() then
+                    Error('Selected Invoice No. %1 is already posted for %2 delivery challan no.', PostedDL."Invoice No.", PostedDL."Delivery Challan No.");
 
                 LineCount := LineCount + 1;
                 Window.UPDATE(1, LineCount);
@@ -357,7 +362,8 @@ page 50101 "Get Invoice Lines Delivery"
                     DelLine."Line No." := 10000;
 
                 DelLine."Delivery Challan No." := DeliveryHeader."Delivery Challan No.";
-                DelLine."Delivery Date" := SalInvLine."Posting Date";
+                DelLine."Delivery Date" := DeliveryHeader."Delivery Date";
+                DelLine."Invoice Date" := SalInvLine."Posting Date";
                 DelLine.Validate("Customer No.", SalInvLine."Sell-to Customer No.");
                 DelLine."Item No." := SalInvLine."No.";
                 DelLine."Item Description" := SalInvLine.Description;

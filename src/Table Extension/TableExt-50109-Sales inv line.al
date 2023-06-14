@@ -7,5 +7,12 @@ tableextension 50109 "Sales inv line" extends "Sales Invoice Line"
             Caption = 'Delivered';
             DataClassification = ToBeClassified;
         }
+        field(50102; Demo; Boolean)
+        {
+            Caption = 'Demo';
+            DataClassification = ToBeClassified;
+            Editable = false;
+        }
+
     }
 }

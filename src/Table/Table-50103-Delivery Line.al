@@ -96,7 +96,6 @@ table 50103 "Delivery Line"
         {
             DataClassification = ToBeClassified;
             Editable = false;
-
         }
         field(15; "Invoice No."; Code[20])
         {
@@ -104,6 +103,11 @@ table 50103 "Delivery Line"
             Editable = false;
         }
         field(16; "Invoice Line No."; Integer)
+        {
+            DataClassification = ToBeClassified;
+            Editable = false;
+        }
+        field(20; "Invoice Date"; Date)
         {
             DataClassification = ToBeClassified;
             Editable = false;

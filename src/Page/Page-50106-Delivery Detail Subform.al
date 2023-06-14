@@ -1,7 +1,7 @@
 page 50106 "Delivery Detail Subform"
 {
     ApplicationArea = All;
-    Caption = 'Delivery Detail Subform';
+    Caption = 'Dispatch Detail Subform';
     PageType = ListPart;
     SourceTable = "Delivery Line";
     AutoSplitKey = true;
@@ -16,10 +16,9 @@ page 50106 "Delivery Detail Subform"
         {
             repeater(General)
             {
-                field("Line No."; Rec."Line No.")
+                field("Invoice Date"; Rec."Invoice Date")
                 {
-                    ToolTip = 'Specifies the value of the Line No. field.';
-                    Editable = false;
+                    ToolTip = 'Specifies the value of the Invoice Date field.';
                 }
                 field("Delivery Date"; Rec."Delivery Date")
                 {
@@ -29,7 +28,6 @@ page 50106 "Delivery Detail Subform"
                 {
                     ToolTip = 'Specifies the value of the Invoice No. field.';
                 }
-
                 field("Customer No."; Rec."Customer No.")
                 {
                     ToolTip = 'Specifies the value of the Customer No. field.';

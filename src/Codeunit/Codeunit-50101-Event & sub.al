@@ -6,7 +6,6 @@ codeunit 50101 "Event & Subs"
     end;
 
     [EventSubscriber(ObjectType::Codeunit, Codeunit::"Instruction Mgt.", 'OnShowPostedDocumentOnBeforePageRun', '', false, false)]
-
     local procedure OnShowPostedDocumentOnBeforePageRun(RecVariant: Variant; CalledFromPageId: Integer; var PageId: Integer)
     var
         RecRef: RecordRef;
@@ -17,4 +16,12 @@ codeunit 50101 "Event & Subs"
                 PageId := Page::"Posted delivery Detail";
         end;
     end;
+
+    [EventSubscriber(ObjectType::Table, Database::"Sales Line", 'OnAfterCopyFromItem', '', false, false)]
+    local procedure OnAfterCopyFromItem(var SalesLine: Record "Sales Line"; Item: Record Item; CurrentFieldNo: Integer; xSalesLine: Record "Sales Line")
+    begin
+        SalesLine.Demo := Item.Demo;
+        SalesLine.Modify();
+    end;
+
 }

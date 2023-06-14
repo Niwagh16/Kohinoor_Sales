@@ -58,14 +58,14 @@ table 50102 "Delivery Header"
         field(8; "Delivery Boy Contact"; Text[30])
         {
             DataClassification = ToBeClassified;
-            trigger OnValidate()
-            var
-                Cnt: Integer;
-            begin
-                Cnt := StrLen("Delivery Boy Contact");
-                IF (Cnt > 10) OR (Cnt < 10) then
-                    Error('Phone No. required 10 digit only.');
-            end;
+            // trigger OnValidate()
+            // var
+            //     Cnt: Integer;
+            // begin
+            //     Cnt := StrLen("Delivery Boy Contact");
+            //     IF (Cnt > 10) OR (Cnt < 10) then
+            //         Error('Phone No. required 10 digit only.');
+            // end;
         }
 
     }

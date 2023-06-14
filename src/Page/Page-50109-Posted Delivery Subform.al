@@ -1,7 +1,7 @@
 page 50109 "Posted Delivery Subform"
 {
     ApplicationArea = All;
-    Caption = 'Posted Delivery Subform';
+    Caption = 'Posted Dispatch Subform';
     PageType = ListPart;
     SourceTable = "Posted Delivery Line";
     AutoSplitKey = true;
@@ -17,6 +17,10 @@ page 50109 "Posted Delivery Subform"
                 field("Invoice No."; Rec."Invoice No.")
                 {
                     ToolTip = 'Specifies the value of the Invoice No. field.';
+                }
+                field("Invoice Date"; Rec."Invoice Date")
+                {
+                    ToolTip = 'Specifies the value of the Invoice Date field.';
                 }
                 field("Customer No."; Rec."Customer No.")
                 {

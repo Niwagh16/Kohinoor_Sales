@@ -1,13 +1,14 @@
-page 50110 "Delivery Status Update"
+page 50111 "Delivered Status List"
 {
     ApplicationArea = All;
-    Caption = 'Delivery Status Update';
+    Caption = 'Delivered Status List';
     PageType = List;
     SourceTable = "Posted Delivery Line";
     UsageCategory = Lists;
     InsertAllowed = false;
     DeleteAllowed = false;
-    SourceTableView = where(Delivered = filter(false));
+    ModifyAllowed = false;
+    SourceTableView = where(Delivered = filter(true));
 
     layout
     {
@@ -86,35 +87,5 @@ page 50110 "Delivery Status Update"
             }
         }
     }
-    actions
-    {
-        area(Processing)
-        {
-            action("Submit for Delivered")
-            {
-                Caption = 'Submit for Delivered';
-                Image = Delivery;
-                PromotedCategory = Process;
-                PromotedIsBig = true;
-                Promoted = true;
-                PromotedOnly = true;
-                ApplicationArea = all;
-                trigger OnAction()
-                var
-                    PDL: Record "Posted Delivery Line";
-                begin
-                    CurrPage.SetSelectionFilter(PDl);
-                    PDL.SetRange(Delivered, false);
-                    if PDL.FindSet() then
-                        repeat
-                            PDL.Validate(Delivered, true);
-                            PDL."Delivered by" := UserId;
-                            PDL."Delivered Date" := Today;
-                            PDl.Modify();
-                        until pdl.Next() = 0;
-                    Message('Delivery Status Updated successfully for selected lines.');
-                end;
-            }
-        }
-    }
+
 }

@@ -1,7 +1,7 @@
 page 50104 "Delivery Details"
 {
     ApplicationArea = All;
-    Caption = 'Delivery Details';
+    Caption = 'Dispatch Details';
     PageType = List;
     SourceTable = "Delivery Header";
     UsageCategory = Lists;

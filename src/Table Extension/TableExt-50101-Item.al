@@ -53,8 +53,12 @@ tableextension 50101 "Item Ext" extends Item
         {
             DataClassification = ToBeClassified;
             TableRelation = "Item Heirarchy Master".Code where("Option Type" = const("Category 8"));
-
         }
+        field(50110; Demo; Boolean)
+        {
+            DataClassification = ToBeClassified;
+        }
+
     }
 
     var

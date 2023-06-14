@@ -130,6 +130,17 @@ table 50105 "Posted Delivery Line"
             TableRelation = "User Setup"."User ID";
             Editable = false;
         }
+        field(20; "Invoice Date"; Date)
+        {
+            DataClassification = ToBeClassified;
+            Editable = false;
+        }
+        field(21; Posted; Boolean)
+        {
+            DataClassification = ToBeClassified;
+            Editable = false;
+        }
+
 
     }
     keys

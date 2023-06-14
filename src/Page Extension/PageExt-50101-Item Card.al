@@ -9,6 +9,7 @@ pageextension 50101 "Item Card Ext1" extends "Item Card"
                 ApplicationArea = all;
 
             }
+
             field("Category 1"; Rec."Category 1")
             {
                 ApplicationArea = All;
@@ -49,13 +50,18 @@ pageextension 50101 "Item Card Ext1" extends "Item Card"
                 ApplicationArea = All;
                 ToolTip = 'Specifies the value of the Category 8 field.';
             }
+            field(Demo; Rec.Demo)
+            {
+                ApplicationArea = All;
+                ToolTip = 'Specifies the value of the Demo field.';
+            }
 
         }
     }
 
     actions
     {
-       
+
     }
 
     var

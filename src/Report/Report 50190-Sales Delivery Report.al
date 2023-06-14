@@ -1,14 +1,19 @@
 report 50190 "Sales Delivery Report"
 {
+    DefaultLayout = RDLC;
+    RDLCLayout = 'src\Report Layout\Sales Delivery Report -1.rdl';
+    ApplicationArea = all;
     UsageCategory = ReportsAndAnalysis;
-    ApplicationArea = All;
-    DefaultRenderingLayout = LayoutName;
 
     dataset
     {
-        dataitem("Delivery Line"; "Delivery Line")
+        dataitem("Posted Delivery Line"; "Posted Delivery Line")
         {
             column(Delivery_Challan_No_; "Delivery Challan No.")
+            {
+
+            }
+            column(Delivered_Date; "Delivered Date")
             {
 
             }
@@ -33,6 +38,11 @@ report 50190 "Sales Delivery Report"
 
             }
             column(Customer_Phone_No_; "Customer Phone No.")
+            {
+
+            }
+            column(Quantity; Quantity)
+
             {
 
             }
@@ -70,14 +80,14 @@ report 50190 "Sales Delivery Report"
         }
     }
 
-    rendering
-    {
-        layout(LayoutName)
-        {
-            Type = RDLC;
-            LayoutFile = 'mylayout.rdl';
-        }
-    }
+    // rendering
+    // {
+    //     layout(LayoutName)
+    //     {
+    //         Type = RDLC;
+    //         LayoutFile = 'mylayout.rdl';
+    //     }
+    // }
 
     var
         myInt: Integer;
