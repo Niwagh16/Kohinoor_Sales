@@ -4,7 +4,7 @@ pageextension 50101 "Item Card Ext1" extends "Item Card"
     {
         addafter("No.")
         {
-            field("Parent Item No."; Rec."Parent Item No.")
+            field("Parent Item No."; Rec."Child Item No.")
             {
                 ApplicationArea = all;
 

@@ -21,7 +21,7 @@ codeunit 50101 "Event & Subs"
     local procedure OnAfterCopyFromItem(var SalesLine: Record "Sales Line"; Item: Record Item; CurrentFieldNo: Integer; xSalesLine: Record "Sales Line")
     begin
         SalesLine.Demo := Item.Demo;
-        SalesLine.Modify();
+
     end;
 
 }

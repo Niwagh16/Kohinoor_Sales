@@ -4,7 +4,7 @@ pageextension 50102 "Item List Ext" extends "Item List"
     {
         addafter("No.")
         {
-            field("Parent Item No."; Rec."Parent Item No.")
+            field("Parent Item No."; Rec."Child Item No.")
             {
                 ApplicationArea = all;
             }

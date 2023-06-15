@@ -46,6 +46,41 @@ report 50190 "Sales Delivery Report"
             {
 
             }
+            column(Store_Name; "Store Name")
+            {
+
+            }
+            column(Delivery_Address; "Delivery Address")
+            {
+
+            }
+            column(Delivery_Address_2; "Delivery Address 2")
+            {
+
+            }
+            column(shiptoadd1; shiptoadd1)
+            {
+
+            }
+            column(shiptocity; shiptocity)
+            {
+
+            }
+            column(shiptocountry; shiptocountry)
+            {
+
+            }
+            trigger OnAfterGetRecord()
+
+            begin
+                RecsalesInvheader.Reset();
+                RecsalesInvheader.SetRange("No.", "Invoice No.");
+                if RecsalesInvheader.FindFirst() then begin
+                    shiptoadd1 := RecsalesInvheader."Ship-to Address" + ',' + RecsalesInvheader."Ship-to Address 2" + ',' + RecsalesInvheader."Ship-to City";
+                    shiptocity := RecsalesInvheader."Ship-to City";
+                    shiptocountry := RecsalesInvheader."Ship-to Country/Region Code";
+                end;
+            end;
         }
 
     }
@@ -91,4 +126,11 @@ report 50190 "Sales Delivery Report"
 
     var
         myInt: Integer;
+        customer: Record Customer;
+        RecsalesInvheader: Record "Sales Invoice Header";
+        shiptoadd1: Text[200];
+        shiptocity: Text[50];
+        shiptocountry: Text[50];
+        shiptostate: text[50];
+
 }
