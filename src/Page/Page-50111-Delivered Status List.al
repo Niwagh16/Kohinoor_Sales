@@ -86,6 +86,35 @@ page 50111 "Delivered Status List"
                 }
             }
         }
+
+    }
+    actions
+    {
+        area(Navigation)
+        {
+            group(Report)
+            {
+                action("Sales Delivery Report")
+                {
+                    ApplicationArea = all;
+                    Image = Print;
+                    Promoted = true;
+                    PromotedCategory = Report;
+                    PromotedIsBig = true;
+                    Caption = 'Demo File';
+                    trigger OnAction()
+                    var
+                        myInt: Integer;
+                        PDL: Record "Posted Delivery Line";
+                    begin
+                        PDL.Reset();
+                        PDL.SetRange("Delivery Challan No.", rec."Delivery Challan No.");
+                        if PDL.FindFirst() then
+                            Report.RunModal(50190, true, false, PDL);
+                    end;
+                }
+            }
+        }
     }
 
 }
