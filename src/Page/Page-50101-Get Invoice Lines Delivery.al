@@ -329,6 +329,7 @@ page 50101 "Get Invoice Lines Delivery"
         RecLoc: Record 14;
         DeliveryLines: Record "Delivery Line";
         PostedDL: Record "Posted Delivery Line";
+        RecItem: Record 27;
 
 
     begin
@@ -366,6 +367,9 @@ page 50101 "Get Invoice Lines Delivery"
                 DelLine."Invoice Date" := SalInvLine."Posting Date";
                 DelLine.Validate("Customer No.", SalInvLine."Sell-to Customer No.");
                 DelLine."Item No." := SalInvLine."No.";
+                IF RecItem.Get(SalInvLine."No.") then begin
+                    DelLine."Item Category code 1" := RecItem."Category 1";
+                end;
                 DelLine."Item Description" := SalInvLine.Description;
                 DelLine.Quantity := SalInvLine.Quantity;
                 DelLine.Warehouse := SalInvLine."Location Code";

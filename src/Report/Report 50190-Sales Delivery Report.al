@@ -1,5 +1,6 @@
 report 50190 "Sales Delivery Report"
 {
+    //pcpl-064
     DefaultLayout = RDLC;
     RDLCLayout = 'src\Report Layout\Sales Delivery Report -1.rdl';
     ApplicationArea = all;
@@ -9,6 +10,7 @@ report 50190 "Sales Delivery Report"
     {
         dataitem("Posted Delivery Line"; "Posted Delivery Line")
         {
+            DataItemTableView = where(Demo = filter(false));
             column(Delivery_Challan_No_; "Delivery Challan No.")
             {
 
@@ -19,7 +21,6 @@ report 50190 "Sales Delivery Report"
             }
             column(Delivery_Date; "Delivery Date")
             {
-
             }
             column(Item_No_; "Item No.")
             {
@@ -70,16 +71,80 @@ report 50190 "Sales Delivery Report"
             {
 
             }
+            column(shiptopostcode; shiptopostcode)
+            {
+
+            }
+            column(customer_mob; customer."Mobile Phone No.")
+            {
+
+            }
+            column(customer_email; customer."E-Mail")
+            {
+
+            }
+            column(Salesorderid; Salesorderid)
+            {
+
+            }
+            column(Srno; Srno)
+            {
+
+            }
+            column(serialno; serialno)
+            {
+
+            }
+            column(Recstate; Recstate.Description)
+            {
+
+            }
+            trigger OnPreDataItem()
+            begin
+                itemheirchy.SetRange(Code, "Posted Delivery Line"."Item Category code 1");
+            end;
+
             trigger OnAfterGetRecord()
 
             begin
+                Srno += 1;
+
                 RecsalesInvheader.Reset();
                 RecsalesInvheader.SetRange("No.", "Invoice No.");
                 if RecsalesInvheader.FindFirst() then begin
                     shiptoadd1 := RecsalesInvheader."Ship-to Address" + ',' + RecsalesInvheader."Ship-to Address 2" + ',' + RecsalesInvheader."Ship-to City";
                     shiptocity := RecsalesInvheader."Ship-to City";
                     shiptocountry := RecsalesInvheader."Ship-to Country/Region Code";
+                    shiptopostcode := RecsalesInvheader."Ship-to Post Code";
                 end;
+                if customer.get("Customer No.") then;
+                if Recstate.Get(customer."State Code") then;
+
+                SH.Reset();
+                SH.SetRange("Sell-to Customer No.", "Customer No.");
+                if SH.FindFirst() then begin
+                    Salesorderid := SH."No.";
+                end;
+
+                //if SIH.get("Invoice No.") then
+                if SIL.get("Invoice No.") then
+                    // SIL.get("Customer No.");
+                    SIL.Reset();
+                SIL.SetRange("Document No.", "Invoice No.");
+                SIL.SetRange("No.", "Item No.");
+                if SIL.FindFirst() then
+                    valueentry.Reset();
+                valueentry.SetRange("Document No.", "Invoice No.");
+                valueentry.SetRange("Document Line No.", "Invoice Line No.");
+                valueentry.SetRange("Source No.", "Customer No.");
+                valueentry.SetRange("Item No.", "Item No.");
+                if valueentry.FindFirst() then
+                    ILE.Reset();
+                ILE.SetRange("Entry No.", valueentry."Item Ledger Entry No.");
+                if ILE.FindFirst() then begin
+                    serialno := ILE."Serial No.";
+                end;
+
             end;
         }
 
@@ -126,11 +191,24 @@ report 50190 "Sales Delivery Report"
 
     var
         myInt: Integer;
+        serialno: code[50];
+        Recstate: record State;
+        valueentry: Record "Value Entry";
+        ILE: Record "Item Ledger Entry";
+        SIH: Record "Sales Invoice Header";
+        SIL: Record "Sales Invoice Line";
         customer: Record Customer;
         RecsalesInvheader: Record "Sales Invoice Header";
         shiptoadd1: Text[200];
         shiptocity: Text[50];
         shiptocountry: Text[50];
         shiptostate: text[50];
+        shiptopostcode: code[30];
+        PDL: record "Posted Delivery Line";
+        Salesorderid: Code[50];
+        SH: Record "Sales Header";
+        Srno: Integer;
+        itemheirchy: Record "Item Heirarchy Master";
+
 
 }

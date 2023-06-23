@@ -62,6 +62,10 @@ page 50109 "Posted Delivery Subform"
                 {
                     ToolTip = 'Specifies the value of the Delivery Address 2 field.';
                 }
+                field("Item Category code 1"; Rec."Item Category code 1")
+                {
+                    ToolTip = 'Specifies the value of the Item Category code 1 field.';
+                }
                 field(Remarks; Rec.Remarks)
                 {
                     ToolTip = 'Specifies the value of the Remarks field.';

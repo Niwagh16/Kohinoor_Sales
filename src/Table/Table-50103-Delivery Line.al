@@ -112,6 +112,10 @@ table 50103 "Delivery Line"
             DataClassification = ToBeClassified;
             Editable = false;
         }
+        field(23; "Item Category code 1"; Code[30])
+        {
+            DataClassification = ToBeClassified;
+        }
 
     }
     keys

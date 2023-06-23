@@ -53,5 +53,30 @@ page 50108 "Posted delivery Detail"
 
             }
         }
+
+    }
+    actions
+    {
+        area(Processing)
+        {
+            action(DataUpdate)
+            {
+                ApplicationArea = all;
+                trigger OnAction()
+                var
+                    PDL: Record "Posted Delivery Line";
+                    Item: Record 27;
+                begin
+                    IF PDL.FindSet() then
+                        repeat
+                            if Item.Get(PDL."Item No.") then begin
+                                PDL."Item Category code 1" := Item."Category 1";
+                                PDL.Modify();
+                            end;
+                        until PDL.Next() = 0;
+                    Message('Done');
+                end;
+            }
+        }
     }
 }

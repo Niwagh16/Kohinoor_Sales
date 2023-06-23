@@ -84,6 +84,10 @@ page 50111 "Delivered Status List"
                 {
                     ToolTip = 'Specifies the value of the Delivered Date field.';
                 }
+                field("Item Category code 1"; Rec."Item Category code 1")
+                {
+                    ToolTip = 'Specifies the value of the Item Category code 1 field.';
+                }
             }
         }
 
@@ -94,25 +98,7 @@ page 50111 "Delivered Status List"
         {
             group(Report)
             {
-                action("Sales Delivery Report")
-                {
-                    ApplicationArea = all;
-                    Image = Print;
-                    Promoted = true;
-                    PromotedCategory = Report;
-                    PromotedIsBig = true;
-                    Caption = 'Demo File';
-                    trigger OnAction()
-                    var
-                        myInt: Integer;
-                        PDL: Record "Posted Delivery Line";
-                    begin
-                        PDL.Reset();
-                        PDL.SetRange("Delivery Challan No.", rec."Delivery Challan No.");
-                        if PDL.FindFirst() then
-                            Report.RunModal(50190, true, false, PDL);
-                    end;
-                }
+
             }
         }
     }
