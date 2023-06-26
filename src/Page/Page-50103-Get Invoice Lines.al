@@ -320,7 +320,10 @@ page 50103 "Get Invoice Lines"
         ValueEntry: record "Value Entry";
         Text000: Label 'Lines Counting to ------ #1';
         ItemJ: Record "Item Journal Line";
+        GLS: Record "General Ledger Setup";
     begin
+        GLS.Get();
+        GLS.TestField("Item Journal Batch for Sales");
         LineCount := 0;
         Window.Open(Text000, LineCount);
         IF SalInvLine.FindSet() then
@@ -329,16 +332,17 @@ page 50103 "Get Invoice Lines"
                 Window.UPDATE();
                 ItemGenJnl.init;
                 ItemGenJnl."Journal Template Name" := 'ITEM';
-                ItemGenJnl."Journal Batch Name" := 'Default';
+                ItemGenJnl."Journal Batch Name" := GLS."Item Journal Batch for Sales";
                 ItemJ.Reset();
                 ItemJ.SetRange("Journal Template Name", 'ITEM');
-                ItemJ.SetRange("Journal Batch Name", 'Default');
+                ItemJ.SetRange("Journal Batch Name", GLS."Item Journal Batch for Sales");
                 IF ItemJ.FindLast() then
                     ItemGenJnl."Line No." := ItemJ."Line No." + 10000
                 else
                     ItemGenJnl."Line No." := 10000;
 
                 ItemGenJnl."Document No." := SalInvLine."Document No.";
+                ItemGenJnl."External Document No." := SalInvLine."Document No.";
                 ItemGenJnl.validate("Posting Date", Today);
                 ItemGenJnl."Entry Type" := ItemGenJnl."Entry Type"::"Positive Adjmt.";
                 ItemGenJnl.Validate("Item No.", SalInvLine."No.");
@@ -353,16 +357,17 @@ page 50103 "Get Invoice Lines"
                 //*********************Negative Adjust Entry Creation******************************
                 ItemGenJnl.init;
                 ItemGenJnl."Journal Template Name" := 'ITEM';
-                ItemGenJnl."Journal Batch Name" := 'Default';
+                ItemGenJnl."Journal Batch Name" := GLS."Item Journal Batch for Sales";
                 ItemJ.Reset();
                 ItemJ.SetRange("Journal Template Name", 'ITEM');
-                ItemJ.SetRange("Journal Batch Name", 'Default');
+                ItemJ.SetRange("Journal Batch Name", GLS."Item Journal Batch for Sales");
                 IF ItemJ.FindLast() then
                     ItemGenJnl."Line No." := ItemJ."Line No." + 10000
                 else
                     ItemGenJnl."Line No." := 10000;
 
                 ItemGenJnl."Document No." := SalInvLine."Document No.";
+                ItemGenJnl."External Document No." := SalInvLine."Document No.";
                 ItemGenJnl.validate("Posting Date", Today);
                 ItemGenJnl."Entry Type" := ItemGenJnl."Entry Type"::"Negative Adjmt.";
                 ItemGenJnl.Validate("Item No.", SalInvLine."No.");

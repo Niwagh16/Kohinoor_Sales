@@ -77,6 +77,23 @@ page 50108 "Posted delivery Detail"
                     Message('Done');
                 end;
             }
+            action("Logistic Delivery Challan Report")
+            {
+                ApplicationArea = all;
+                Image = Print;
+                Promoted = true;
+                //PromotedIsBig = true;
+                PromotedCategory = Report;
+                trigger OnAction()
+                var
+                    PDH: Record "Posted Delivery Header";
+                begin
+                    PDH.Reset();
+                    PDH.SetRange("Delivery Challan No.", PDH."Delivery Challan No.");
+                    if PDH.FindFirst() then
+                        Report.RunModal(50191, true, true, PDH);
+                end;
+            }
         }
     }
 }
