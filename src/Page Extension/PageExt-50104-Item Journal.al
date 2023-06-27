@@ -32,6 +32,19 @@ pageextension 50104 "Item Journal Ext" extends "Item Journal"
                         GetInvoiceLine();
                 end;
             }
+            action("Get Purch. Invoice Lines")
+            {
+                Caption = 'Get Purch. Invoice Lines';
+                ApplicationArea = all;
+                Image = GetLines;
+                PromotedIsBig = true;
+                Promoted = true;
+                trigger OnAction()
+                begin
+                    IF Confirm('Do you want fetch the Purchase invoice line', true) then
+                        GetPurchInvoiceLine();
+                end;
+            }
             action("Confirm Post")
             {
                 Caption = 'Confirm Post';
@@ -63,6 +76,18 @@ pageextension 50104 "Item Journal Ext" extends "Item Journal"
         GetInvoiceLine.SetTableView(SalesInvLine);
         GetInvoiceLine.LookupMode := true;
         IF GetInvoiceLine.RUNMODAL <> ACTION::Cancel THEN;
+    End;
+
+    procedure GetPurchInvoiceLine()
+    var
+        GetPurchInvoiceLine: page "Get Purch Inv Lines";
+    Begin
+        PurchInvLine.SetCurrentKey("Document No.");
+        PurchInvLine.SetRange(Type, SalesInvLine.Type::Item);
+        PurchInvLine.SetFilter(Quantity, '<>%1', 0);
+        GetPurchInvoiceLine.SetTableView(PurchInvLine);
+        GetPurchInvoiceLine.LookupMode := true;
+        IF GetPurchInvoiceLine.RUNMODAL <> ACTION::Cancel THEN;
     End;
 
     procedure ConfirmDatamovetoTabel()
@@ -107,5 +132,6 @@ pageextension 50104 "Item Journal Ext" extends "Item Journal"
 
     var
         SalesInvLine: Record 113;
+        PurchInvLine: Record "Purch. Inv. Line";
 
 }

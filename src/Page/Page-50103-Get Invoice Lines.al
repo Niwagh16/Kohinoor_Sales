@@ -346,7 +346,7 @@ page 50103 "Get Invoice Lines"
                 ItemGenJnl.validate("Posting Date", Today);
                 ItemGenJnl."Entry Type" := ItemGenJnl."Entry Type"::"Positive Adjmt.";
                 ItemGenJnl.Validate("Item No.", SalInvLine."No.");
-                ItemGenJnl.Validate("Bin Code", SalInvLine."Bin Code");
+                //ItemGenJnl.Validate("Bin Code", SalInvLine."Bin Code");
                 ItemGenJnl.Validate("Location Code", SalInvLine."Location Code");
                 ItemGenJnl.Validate(Quantity, SalInvLine.Quantity);
                 ItemGenJnl.Validate("Unit of Measure Code", SalInvLine."Unit of Measure Code");
@@ -371,7 +371,7 @@ page 50103 "Get Invoice Lines"
                 ItemGenJnl.validate("Posting Date", Today);
                 ItemGenJnl."Entry Type" := ItemGenJnl."Entry Type"::"Negative Adjmt.";
                 ItemGenJnl.Validate("Item No.", SalInvLine."No.");
-                ItemGenJnl.Validate("Bin Code", SalInvLine."Bin Code");
+                //ItemGenJnl.Validate("Bin Code", SalInvLine."Bin Code");
                 ItemGenJnl.Validate("Location Code", SalInvLine."Location Code");
                 ItemGenJnl.Validate(Quantity, SalInvLine.Quantity);
                 ItemGenJnl.Validate("Unit of Measure Code", SalInvLine."Unit of Measure Code");

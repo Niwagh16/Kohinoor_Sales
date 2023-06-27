@@ -328,11 +328,11 @@ page 50112 "Get Purch Inv Lines"
 
     local procedure GetDataFromRcptHeader()
     var
-        SrcPurchRcptHeader: Record "Purch. Rcpt. Header";
+        SrcPurchRcptHeader: Record "Purch. Inv. Header";
     begin
         SrcPurchRcptHeader.Get(Rec."Document No.");
         VendorOrderNo := SrcPurchRcptHeader."Vendor Order No.";
-        VendorShptNo := SrcPurchRcptHeader."Vendor Shipment No.";
+        //VendorShptNo := SrcPurchRcptHeader."Vendor Shipment No.";
         OrderNo := SrcPurchRcptHeader."Order No.";
 
         ItemReferenceNo := Rec."Item Reference No.";
@@ -374,9 +374,9 @@ page 50112 "Get Purch Inv Lines"
                 ItemGenJnl."Document No." := PurchInvLine."Document No.";
                 ItemGenJnl."External Document No." := PurchInvLine."Document No.";
                 ItemGenJnl.validate("Posting Date", Today);
-                ItemGenJnl."Entry Type" := ItemGenJnl."Entry Type"::"Positive Adjmt.";
+                ItemGenJnl."Entry Type" := ItemGenJnl."Entry Type"::"Negative Adjmt.";
                 ItemGenJnl.Validate("Item No.", PurchInvLine."No.");
-                ItemGenJnl.Validate("Bin Code", PurchInvLine."Bin Code");
+                //ItemGenJnl.Validate("Bin Code", PurchInvLine."Bin Code");
                 ItemGenJnl.Validate("Location Code", PurchInvLine."Location Code");
                 ItemGenJnl.Validate(Quantity, PurchInvLine.Quantity);
                 ItemGenJnl.Validate("Unit of Measure Code", PurchInvLine."Unit of Measure Code");
@@ -399,18 +399,59 @@ page 50112 "Get Purch Inv Lines"
                 ItemGenJnl."Document No." := PurchInvLine."Document No.";
                 ItemGenJnl."External Document No." := PurchInvLine."Document No.";
                 ItemGenJnl.validate("Posting Date", Today);
-                ItemGenJnl."Entry Type" := ItemGenJnl."Entry Type"::"Negative Adjmt.";
+                ItemGenJnl."Entry Type" := ItemGenJnl."Entry Type"::"Positive Adjmt.";
                 ItemGenJnl.Validate("Item No.", PurchInvLine."No.");
-                ItemGenJnl.Validate("Bin Code", PurchInvLine."Bin Code");
+                //ItemGenJnl.Validate("Bin Code", PurchInvLine."Bin Code");
                 ItemGenJnl.Validate("Location Code", PurchInvLine."Location Code");
                 ItemGenJnl.Validate(Quantity, PurchInvLine.Quantity);
                 ItemGenJnl.Validate("Unit of Measure Code", PurchInvLine."Unit of Measure Code");
                 ItemGenJnl.Validate("Shortcut Dimension 1 Code", PurchInvLine."Shortcut Dimension 1 Code");
                 ItemGenJnl.Validate("Shortcut Dimension 2 Code", PurchInvLine."Shortcut Dimension 2 Code");
                 ItemGenJnl.insert;
+                InsertTrackingSpecification(PurchInvLine, ItemGenJnl); //For Create Tracking Specifications in Item Journal
             until PurchInvLine.Next() = 0;
         Window.Close();
     end;
+
+    procedure InsertTrackingSpecification(var PurchInvLine: Record "Purch. Inv. Line"; var ItemGenJnl: Record "Item Journal Line")
+    var
+        ILE: Record "Item Ledger Entry";
+        ReservEntry: Record "Reservation Entry";
+        ValueEntry: record "Value Entry";
+        ReservEntryInit: Record "Reservation Entry";
+    Begin
+
+        ValueEntry.Reset;
+        ValueEntry.Setrange("Document No.", PurchInvLine."Document No.");
+        ValueEntry.SetRange("Document Line No.", PurchInvLine."Line No.");
+        if ValueEntry.FindSet() then
+            repeat
+                if ILE.GET(ValueEntry."Item Ledger Entry No.") then begin
+                    ReservEntry.Reset();
+                    ReservEntry.LockTable();
+                    if ReservEntry.FindLast() then;
+                    ReservEntryInit.Init();
+                    ReservEntryInit."Entry No." := ReservEntry."Entry No." + 1;
+                    ReservEntryInit."Item No." := ItemGenJnl."Item No.";
+                    ReservEntryInit."Location Code" := ItemGenJnl."Location Code";
+                    ReservEntryInit.validate("Quantity (Base)", PurchInvLine.Quantity);
+                    ReservEntryInit."Reservation Status" := ReservEntryInit."Reservation Status"::Prospect;
+                    ReservEntryInit."Source Type" := DATABASE::"Item Journal Line";
+                    ReservEntryInit."Source Subtype" := 2;
+                    ReservEntryInit."Source ID" := ItemGenJnl."Journal Template Name";
+                    ReservEntryInit."Source Batch Name" := ItemGenJnl."Journal Batch Name";
+                    ReservEntryInit."Source Ref. No." := ItemGenJnl."Line No.";
+                    ReservEntryInit."Creation Date" := Today;
+                    ReservEntryInit."Created By" := UserId;
+                    ReservEntryInit."Serial No." := ILE."Serial No.";
+                    ReservEntryInit."Expected Receipt Date" := Today;
+                    ReservEntryInit.Positive := true;
+                    ReservEntryInit."Item Tracking" := ReservEntryInit."Item Tracking"::"Serial No.";
+                    ReservEntryInit.Insert();
+                end;
+            until ValueEntry.Next = 0;
+    end;
+
 
 
 }
