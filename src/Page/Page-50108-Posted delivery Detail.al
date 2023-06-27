@@ -89,10 +89,14 @@ page 50108 "Posted delivery Detail"
                     PDH: Record "Posted Delivery Header";
                 begin
                     PDH.Reset();
-                    PDH.SetRange("Delivery Challan No.", PDH."Delivery Challan No.");
+                    PDH.SetRange("Delivery Challan No.", Rec."Delivery Challan No.");
                     if PDH.FindFirst() then
-                        Report.RunModal(50191, true, true, PDH);
+                        Report.RunModal(50191, true, false, PDH);
                 end;
+
+
+
+
             }
         }
     }

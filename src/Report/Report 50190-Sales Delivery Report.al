@@ -22,11 +22,11 @@ report 50190 "Sales Delivery Report"
             column(Delivery_Date; "Delivery Date")
             {
             }
-            column(Item_No_; "Item No.")
+            column(Item_No_; "Posted Delivery Line"."Item No.")
             {
 
             }
-            column(Item_Description; "Item Description")
+            column(Item_Description; "Posted Delivery Line"."Item Description")
             {
 
             }
@@ -87,7 +87,7 @@ report 50190 "Sales Delivery Report"
             {
 
             }
-            column(Srno; Srno)
+            column(Srno; "Posted Delivery Line"."Item No.")
             {
 
             }
@@ -101,7 +101,7 @@ report 50190 "Sales Delivery Report"
             }
             trigger OnPreDataItem()
             begin
-                itemheirchy.SetRange(Code, "Posted Delivery Line"."Item Category code 1");
+                // itemheirchy.SetRange(Code, "Posted Delivery Line"."Item Category code 1");
             end;
 
             trigger OnAfterGetRecord()
@@ -120,32 +120,37 @@ report 50190 "Sales Delivery Report"
                 if customer.get("Customer No.") then;
                 if Recstate.Get(customer."State Code") then;
 
-                SH.Reset();
-                SH.SetRange("Sell-to Customer No.", "Customer No.");
-                if SH.FindFirst() then begin
-                    Salesorderid := SH."No.";
+                // SH.Reset();
+                // SH.SetRange("Sell-to Customer No.", "Customer No.");
+                // if SH.FindFirst() then begin
+                //     Salesorderid := SH."No.";
+                // end;
+                if SIH.get("Invoice No.") then begin
+                    Salesorderid := SiH."Order No.";
                 end;
-
-                //if SIH.get("Invoice No.") then
-                if SIL.get("Invoice No.") then
-                    // SIL.get("Customer No.");
-                    SIL.Reset();
+                //SIL.Reset();
+                //sil.SetRange("Document No.","Invoice No.");
+                //if SIL.get("Invoice No.") then begin
+                SIL.Reset();
                 SIL.SetRange("Document No.", "Invoice No.");
                 SIL.SetRange("No.", "Item No.");
-                if SIL.FindFirst() then
+                SIL.SetRange("Line No.", "Invoice Line No.");
+                if SIL.FindFirst() then begin
                     valueentry.Reset();
-                valueentry.SetRange("Document No.", "Invoice No.");
-                valueentry.SetRange("Document Line No.", "Invoice Line No.");
-                valueentry.SetRange("Source No.", "Customer No.");
-                valueentry.SetRange("Item No.", "Item No.");
-                if valueentry.FindFirst() then
-                    ILE.Reset();
-                ILE.SetRange("Entry No.", valueentry."Item Ledger Entry No.");
-                if ILE.FindFirst() then begin
-                    serialno := ILE."Serial No.";
+                    valueentry.SetRange("Document No.", "Invoice No.");
+                    valueentry.SetRange("Document Line No.", "Invoice Line No.");
+                    valueentry.SetRange("Source No.", "Customer No.");
+                    valueentry.SetRange("Item No.", "Item No.");
+                    if valueentry.FindFirst() then begin
+                        ILE.Reset();
+                        ILE.SetRange("Entry No.", valueentry."Item Ledger Entry No.");
+                        if ILE.FindFirst() then begin
+                            serialno := ILE."Serial No.";
+                        end;
+                    end;
                 end;
-
             end;
+            //end;
         }
 
     }

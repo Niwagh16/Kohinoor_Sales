@@ -19,5 +19,13 @@ permissionset 50101 GeneratedPermiSales
         table "Posted Delivery Line" = X,
         page "Posted delivery Detail" = X,
         page "Posted Delivery Details" = X,
-        page "Posted Delivery Subform" = X;
+        page "Posted Delivery Subform" = X,
+        tabledata "Item Journal Replace Data" = RIMD,
+        table "Item Journal Replace Data" = X,
+        report "Logistic Delivery Challan" = X,
+        report "Sales Delivery Report" = X,
+        codeunit "Event & Subs" = X,
+        xmlport "Inventory Upload XML" = X,
+        page "Delivered Status List" = X,
+        page "Delivery Status Update" = X;
 }

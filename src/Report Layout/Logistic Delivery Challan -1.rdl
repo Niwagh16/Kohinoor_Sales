@@ -11,70 +11,6 @@
       <rd:DataSourceID>6092c17c-1d4c-4edc-b1c2-1da0cf8c3f61</rd:DataSourceID>
     </DataSource>
   </DataSources>
-  <DataSets>
-    <DataSet Name="DataSet_Result">
-      <Query>
-        <DataSourceName>DataSource</DataSourceName>
-        <CommandText />
-      </Query>
-      <Fields>
-        <Field Name="Delivery_Challan_No_">
-          <DataField>Delivery_Challan_No_</DataField>
-        </Field>
-        <Field Name="Vehicle_No_">
-          <DataField>Vehicle_No_</DataField>
-        </Field>
-        <Field Name="Delivery_Boy">
-          <DataField>Delivery_Boy</DataField>
-        </Field>
-        <Field Name="Delivery_Boy_Contact">
-          <DataField>Delivery_Boy_Contact</DataField>
-        </Field>
-        <Field Name="Delivery_Date">
-          <DataField>Delivery_Date</DataField>
-        </Field>
-        <Field Name="Driver_Contact_No_">
-          <DataField>Driver_Contact_No_</DataField>
-        </Field>
-        <Field Name="Driver_Name">
-          <DataField>Driver_Name</DataField>
-        </Field>
-        <Field Name="cominfo_name">
-          <DataField>cominfo_name</DataField>
-        </Field>
-        <Field Name="Invoice_No_">
-          <DataField>Invoice_No_</DataField>
-        </Field>
-        <Field Name="Customer_Name">
-          <DataField>Customer_Name</DataField>
-        </Field>
-        <Field Name="Customer_Phone_No_">
-          <DataField>Customer_Phone_No_</DataField>
-        </Field>
-        <Field Name="Item_No_">
-          <DataField>Item_No_</DataField>
-        </Field>
-        <Field Name="Quantity">
-          <DataField>Quantity</DataField>
-        </Field>
-        <Field Name="QuantityFormat">
-          <DataField>QuantityFormat</DataField>
-        </Field>
-        <Field Name="Warehouse">
-          <DataField>Warehouse</DataField>
-        </Field>
-        <Field Name="Delivery_Address">
-          <DataField>Delivery_Address</DataField>
-        </Field>
-        <Field Name="Store_Name">
-          <DataField>Store_Name</DataField>
-        </Field>
-        <Field Name="Remarks">
-          <DataField>Remarks</DataField>
-        </Field>
-      </Fields>
-    </DataSet>
-  </DataSets>
   <ReportSections>
     <ReportSection>
       <Body>
@@ -119,7 +55,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>Challan Number       :</Value>
+                    <Value>Challan Number      :</Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                       <FontWeight>Bold</FontWeight>
@@ -134,7 +70,7 @@
             </Paragraphs>
             <rd:DefaultName>Textbox2</rd:DefaultName>
             <Top>0.035cm</Top>
-            <Left>13.51703cm</Left>
+            <Left>14.46953cm</Left>
             <Height>0.6cm</Height>
             <Width>3.12208cm</Width>
             <ZIndex>1</ZIndex>
@@ -156,7 +92,11 @@
                 <TextRuns>
                   <TextRun>
                     <Value>=First(Fields!Delivery_Challan_No_.Value, "DataSet_Result")</Value>
-                    <Style />
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                      <TextDecoration>Underline</TextDecoration>
+                    </Style>
                   </TextRun>
                 </TextRuns>
                 <Style />
@@ -164,9 +104,9 @@
             </Paragraphs>
             <rd:DefaultName>Textbox3</rd:DefaultName>
             <Top>0.035cm</Top>
-            <Left>16.81551cm</Left>
+            <Left>17.59161cm</Left>
             <Height>0.6cm</Height>
-            <Width>4.38736cm</Width>
+            <Width>3.37313cm</Width>
             <ZIndex>2</ZIndex>
             <Style>
               <Border>
@@ -185,7 +125,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>Vehicle Number           :</Value>
+                    <Value>Vehicle Number            :</Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                       <FontWeight>Bold</FontWeight>
@@ -298,7 +238,7 @@
             <Top>1.00224cm</Top>
             <Left>3.70826cm</Left>
             <Height>0.6cm</Height>
-            <Width>4.71523cm</Width>
+            <Width>4.42419cm</Width>
             <ZIndex>6</ZIndex>
             <Style>
               <Border>
@@ -328,10 +268,10 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox8</rd:DefaultName>
-            <Top>1.77863cm</Top>
+            <Top>1.74335cm</Top>
             <Left>3.70826cm</Left>
-            <Height>0.52944cm</Height>
-            <Width>4.71523cm</Width>
+            <Height>0.49417cm</Height>
+            <Width>4.42419cm</Width>
             <ZIndex>7</ZIndex>
             <Style>
               <Border>
@@ -361,10 +301,10 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox9</rd:DefaultName>
-            <Top>2.41391cm</Top>
+            <Top>2.37863cm</Top>
             <Left>3.70826cm</Left>
-            <Height>0.47653cm</Height>
-            <Width>4.71523cm</Width>
+            <Height>0.51181cm</Height>
+            <Width>4.42419cm</Width>
             <ZIndex>8</ZIndex>
             <Style>
               <Border>
@@ -383,7 +323,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>Driver Name</Value>
+                    <Value>Driver Name              :</Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                       <FontWeight>Bold</FontWeight>
@@ -395,7 +335,7 @@
             </Paragraphs>
             <rd:DefaultName>Textbox10</rd:DefaultName>
             <Top>1.00224cm</Top>
-            <Left>9.04558cm</Left>
+            <Left>8.09308cm</Left>
             <Height>0.6cm</Height>
             <Width>3.135cm</Width>
             <ZIndex>9</ZIndex>
@@ -416,7 +356,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>Day Reading</Value>
+                    <Value>Day Reading              :</Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                       <FontWeight>Bold</FontWeight>
@@ -428,8 +368,8 @@
             </Paragraphs>
             <rd:DefaultName>Textbox11</rd:DefaultName>
             <Top>1.74335cm</Top>
-            <Left>9.04558cm</Left>
-            <Height>0.6cm</Height>
+            <Left>8.09308cm</Left>
+            <Height>0.52945cm</Height>
             <Width>3.135cm</Width>
             <ZIndex>10</ZIndex>
             <Style>
@@ -461,7 +401,7 @@
             </Paragraphs>
             <rd:DefaultName>Textbox12</rd:DefaultName>
             <Top>1.00224cm</Top>
-            <Left>12.28641cm</Left>
+            <Left>11.33391cm</Left>
             <Height>0.6cm</Height>
             <Width>3.59833cm</Width>
             <ZIndex>11</ZIndex>
@@ -494,7 +434,7 @@
             </Paragraphs>
             <rd:DefaultName>Textbox13</rd:DefaultName>
             <Top>1.6728cm</Top>
-            <Left>12.28641cm</Left>
+            <Left>11.33391cm</Left>
             <Height>0.6cm</Height>
             <Width>3.59833cm</Width>
             <ZIndex>12</ZIndex>
@@ -527,7 +467,7 @@
             </Paragraphs>
             <rd:DefaultName>Textbox14</rd:DefaultName>
             <Top>1.00224cm</Top>
-            <Left>16.06113cm</Left>
+            <Left>15.10863cm</Left>
             <Height>0.6cm</Height>
             <Width>2.5cm</Width>
             <ZIndex>13</ZIndex>
@@ -548,7 +488,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>In Time              :</Value>
+                    <Value>In Time               :</Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                       <FontWeight>Bold</FontWeight>
@@ -560,7 +500,7 @@
             </Paragraphs>
             <rd:DefaultName>Textbox15</rd:DefaultName>
             <Top>1.77863cm</Top>
-            <Left>16.06113cm</Left>
+            <Left>15.10863cm</Left>
             <Height>0.52944cm</Height>
             <Width>2.5cm</Width>
             <ZIndex>14</ZIndex>
@@ -581,8 +521,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>Out Time
-           :</Value>
+                    <Value>Out Time            :</Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                       <FontWeight>Bold</FontWeight>
@@ -594,7 +533,7 @@
             </Paragraphs>
             <rd:DefaultName>Textbox16</rd:DefaultName>
             <Top>2.41391cm</Top>
-            <Left>16.06113cm</Left>
+            <Left>15.10863cm</Left>
             <Height>0.47653cm</Height>
             <Width>2.5cm</Width>
             <ZIndex>15</ZIndex>
@@ -623,14 +562,16 @@
                     </Style>
                   </TextRun>
                 </TextRuns>
-                <Style />
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                </Style>
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox17</rd:DefaultName>
             <Top>1.00224cm</Top>
-            <Left>18.73752cm</Left>
+            <Left>17.78502cm</Left>
             <Height>0.6cm</Height>
-            <Width>2.46535cm</Width>
+            <Width>2.91514cm</Width>
             <ZIndex>16</ZIndex>
             <Style>
               <Border>
@@ -661,16 +602,16 @@
                   <Width>1.95853cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>2.5cm</Width>
+                  <Width>1.44167cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>2.5cm</Width>
+                  <Width>4.61667cm</Width>
                 </TablixColumn>
                 <TablixColumn>
                   <Width>2.06376cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>2.5cm</Width>
+                  <Width>1.5475cm</Width>
                 </TablixColumn>
               </TablixColumns>
               <TablixRows>
@@ -1416,7 +1357,7 @@
             <Top>2.89044cm</Top>
             <Left>0cm</Left>
             <Height>1.2cm</Height>
-            <Width>21.20287cm</Width>
+            <Width>21.30871cm</Width>
             <ZIndex>17</ZIndex>
             <Style>
               <Border>
@@ -1424,33 +1365,73 @@
               </Border>
             </Style>
           </Tablix>
+          <Textbox Name="Textbox19">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Checked by: Name:                                                                                                                                                          Signature
+</Value>
+                    <Style />
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox19</rd:DefaultName>
+            <Top>5.92349cm</Top>
+            <Left>0cm</Left>
+            <Height>0.6cm</Height>
+            <Width>21.30871cm</Width>
+            <ZIndex>18</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <TopBorder>
+                <Color>Black</Color>
+                <Style>Solid</Style>
+                <Width>1pt</Width>
+              </TopBorder>
+              <LeftBorder>
+                <Color>Black</Color>
+                <Style>Solid</Style>
+                <Width>1pt</Width>
+              </LeftBorder>
+              <RightBorder>
+                <Color>Black</Color>
+                <Style>Solid</Style>
+                <Width>1pt</Width>
+              </RightBorder>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
         </ReportItems>
-        <Height>4.60995cm</Height>
+        <Height>6.62078cm</Height>
         <Style>
           <Border>
             <Style>Solid</Style>
           </Border>
         </Style>
       </Body>
-      <Width>21.20287cm</Width>
+      <Width>21.30871cm</Width>
       <Page>
         <PageHeight>29.7cm</PageHeight>
-        <PageWidth>21.5cm</PageWidth>
-        <LeftMargin>0.5cm</LeftMargin>
-        <RightMargin>0.6cm</RightMargin>
-        <TopMargin>0cm</TopMargin>
-        <BottomMargin>0cm</BottomMargin>
+        <PageWidth>22cm</PageWidth>
+        <LeftMargin>0.3cm</LeftMargin>
+        <RightMargin>0.36cm</RightMargin>
+        <TopMargin>0.5cm</TopMargin>
+        <BottomMargin>0.5cm</BottomMargin>
         <ColumnSpacing>1.27cm</ColumnSpacing>
         <Style />
       </Page>
     </ReportSection>
   </ReportSections>
-  <ReportParametersLayout>
-    <GridLayoutDefinition>
-      <NumberOfColumns>4</NumberOfColumns>
-      <NumberOfRows>2</NumberOfRows>
-    </GridLayoutDefinition>
-  </ReportParametersLayout>
   <Code>Public Function BlankZero(ByVal Value As Decimal)
     if Value = 0 then
         Return ""
@@ -1490,4 +1471,68 @@ End Function
   <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
   <rd:ReportUnitType>Cm</rd:ReportUnitType>
   <rd:ReportID>0eeb6585-38ae-40f1-885b-8d50088d51b4</rd:ReportID>
+  <DataSets>
+    <DataSet Name="DataSet_Result">
+      <Fields>
+        <Field Name="Delivery_Challan_No_">
+          <DataField>Delivery_Challan_No_</DataField>
+        </Field>
+        <Field Name="Vehicle_No_">
+          <DataField>Vehicle_No_</DataField>
+        </Field>
+        <Field Name="Delivery_Boy">
+          <DataField>Delivery_Boy</DataField>
+        </Field>
+        <Field Name="Delivery_Boy_Contact">
+          <DataField>Delivery_Boy_Contact</DataField>
+        </Field>
+        <Field Name="Delivery_Date">
+          <DataField>Delivery_Date</DataField>
+        </Field>
+        <Field Name="Driver_Contact_No_">
+          <DataField>Driver_Contact_No_</DataField>
+        </Field>
+        <Field Name="Driver_Name">
+          <DataField>Driver_Name</DataField>
+        </Field>
+        <Field Name="cominfo_name">
+          <DataField>cominfo_name</DataField>
+        </Field>
+        <Field Name="Invoice_No_">
+          <DataField>Invoice_No_</DataField>
+        </Field>
+        <Field Name="Customer_Name">
+          <DataField>Customer_Name</DataField>
+        </Field>
+        <Field Name="Customer_Phone_No_">
+          <DataField>Customer_Phone_No_</DataField>
+        </Field>
+        <Field Name="Item_No_">
+          <DataField>Item_No_</DataField>
+        </Field>
+        <Field Name="Quantity">
+          <DataField>Quantity</DataField>
+        </Field>
+        <Field Name="QuantityFormat">
+          <DataField>QuantityFormat</DataField>
+        </Field>
+        <Field Name="Warehouse">
+          <DataField>Warehouse</DataField>
+        </Field>
+        <Field Name="Delivery_Address">
+          <DataField>Delivery_Address</DataField>
+        </Field>
+        <Field Name="Store_Name">
+          <DataField>Store_Name</DataField>
+        </Field>
+        <Field Name="Remarks">
+          <DataField>Remarks</DataField>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>DataSource</DataSourceName>
+        <CommandText />
+      </Query>
+    </DataSet>
+  </DataSets>
 </Report>
