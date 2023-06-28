@@ -74,6 +74,14 @@ table 50106 "Item Journal Replace Data"
             Caption = 'Reason code';
             DataClassification = ToBeClassified;
         }
+        field(15; "External Document No."; Code[20])
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(16; "Entry Posted"; Boolean)
+        {
+            DataClassification = ToBeClassified;
+        }
     }
     keys
     {

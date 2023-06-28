@@ -352,6 +352,7 @@ page 50103 "Get Invoice Lines"
                 ItemGenJnl.Validate("Unit of Measure Code", SalInvLine."Unit of Measure Code");
                 ItemGenJnl.Validate("Shortcut Dimension 1 Code", SalInvLine."Shortcut Dimension 1 Code");
                 ItemGenJnl.Validate("Shortcut Dimension 2 Code", SalInvLine."Shortcut Dimension 2 Code");
+                ItemGenJnl."Reason Code" := GLS."Item Journal Batch for Sales";
                 ItemGenJnl.insert;
                 InsertTrackingSpecification(SalInvLine, ItemGenJnl); //For Create Tracking Specifications in Item Journal
                 //*********************Negative Adjust Entry Creation******************************
@@ -377,6 +378,7 @@ page 50103 "Get Invoice Lines"
                 ItemGenJnl.Validate("Unit of Measure Code", SalInvLine."Unit of Measure Code");
                 ItemGenJnl.Validate("Shortcut Dimension 1 Code", SalInvLine."Shortcut Dimension 1 Code");
                 ItemGenJnl.Validate("Shortcut Dimension 2 Code", SalInvLine."Shortcut Dimension 2 Code");
+                ItemGenJnl."Reason Code" := GLS."Item Journal Batch for Sales";
                 ItemGenJnl.insert;
             until SalInvLine.Next() = 0;
         Window.Close();
