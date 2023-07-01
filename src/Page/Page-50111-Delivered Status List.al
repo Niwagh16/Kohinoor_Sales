@@ -88,6 +88,10 @@ page 50111 "Delivered Status List"
                 {
                     ToolTip = 'Specifies the value of the Item Category code 1 field.';
                 }
+                field(Demo; Rec.Demo)
+                {
+                    ToolTip = 'Specifies the value of the Demo field.';
+                }
             }
         }
 

@@ -45,17 +45,48 @@ pageextension 50104 "Item Journal Ext" extends "Item Journal"
                         GetPurchInvoiceLine();
                 end;
             }
-            action("Confirm Post")
+            action("Invetory upload")
             {
-                Caption = 'Confirm Post';
+                Caption = 'Invetory upload';
+                ApplicationArea = all;
+                Image = Import;
+                PromotedIsBig = true;
+                Promoted = true;
+                trigger OnAction()
+                var
+                    IU: XmlPort 50101;
+                begin
+                    IU.Run();
+                end;
+            }
+            action("Delete Item Journal Lines")
+            {
+                Caption = 'Delete Item Journal Lines';
                 ApplicationArea = all;
                 Image = Confirm;
                 PromotedIsBig = true;
                 Promoted = true;
                 trigger OnAction()
+                var
+                    IJ: Record 83;
+                    Res: Record "Reservation Entry";
                 begin
-                    IF Confirm('Do you want Confirm Selected sales invoice line', true) then
-                        ConfirmDatamovetoTabel();
+                    IJ.Reset();
+                    IJ.SetRange("Journal Template Name", rec."Journal Template Name");
+                    IJ.SetRange("Journal Batch Name", rec."Journal Batch Name");
+                    IF IJ.FindSet() then
+                        repeat
+                            IJ.Delete();
+                        until IJ.Next() = 0;
+                    Res.Reset();
+                    Res.SetRange("Source ID", 'Item');
+                    Res.SetRange("Source Type", 83);
+                    Res.SetRange("Source Subtype", 2);
+                    IF Res.FindSet() then
+                        repeat
+                            Res.Delete();
+                        until Res.Next() = 0;
+                    Message('All Lines Delete Successfully.');
                 end;
             }
 
