@@ -87,7 +87,11 @@ report 50190 "Sales Delivery Report"
             {
 
             }
-            column(Srno; "Posted Delivery Line"."Item No.")
+            // column(Srno; "Posted Delivery Line"."Item No.")
+            // {
+
+            // }
+            column(Srno; Srno)
             {
 
             }
@@ -99,6 +103,27 @@ report 50190 "Sales Delivery Report"
             {
 
             }
+            column(Category_1; RecItem."Category 1")
+            {
+
+            }
+            column(Category_2; RecItem."Category 2")
+            {
+
+            }
+            column(Category_3; RecItem."Category 3")
+            {
+
+            }
+            column(RecItem_No2; RecItem."No. 2")
+            {
+
+            }
+            column(StoreNo; StoreNo)
+            {
+
+            }
+
             trigger OnPreDataItem()
             begin
                 // itemheirchy.SetRange(Code, "Posted Delivery Line"."Item Category code 1");
@@ -119,6 +144,10 @@ report 50190 "Sales Delivery Report"
                 end;
                 if customer.get("Customer No.") then;
                 if Recstate.Get(customer."State Code") then;
+
+                if RecSIL.Get("Invoice No.") then;
+                if RecItem.Get("Item No.") then;
+
 
                 // SH.Reset();
                 // SH.SetRange("Sell-to Customer No.", "Customer No.");
@@ -149,6 +178,14 @@ report 50190 "Sales Delivery Report"
                         end;
                     end;
                 end;
+                RecSIL.Reset();
+                RecSIL.SetRange("Document No.", "Invoice No.");
+                RecSIL.SetRange("No.", "Item No.");
+                RecSIL.SetRange("Line No.", "Invoice Line No.");
+                if RecSIL.FindFirst() then begin
+                    StoreNo := RecSIL."Shortcut Dimension 2 Code";
+                end;
+
             end;
             //end;
         }
@@ -197,6 +234,7 @@ report 50190 "Sales Delivery Report"
     var
         myInt: Integer;
         serialno: code[50];
+        RecSIL: record "Sales Invoice Line";
         Recstate: record State;
         valueentry: Record "Value Entry";
         ILE: Record "Item Ledger Entry";
@@ -214,6 +252,8 @@ report 50190 "Sales Delivery Report"
         SH: Record "Sales Header";
         Srno: Integer;
         itemheirchy: Record "Item Heirarchy Master";
+        RecItem: Record Item;
+        StoreNo: Code[20];
 
 
 }
