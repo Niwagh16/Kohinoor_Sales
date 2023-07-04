@@ -1,1 +1,1 @@
-﻿{"Added":[],"Modified":[],"Removed":[]}
+﻿{"Added":[],"Modified":[{"Id":50101,"Kind":15,"Name":"Inventory Upload XML","PackagePath":"/src/src/Xml/XML-50101-Inventory%20Upload%20XML.al"},{"Id":50101,"Kind":17,"Name":"Item Ext","PackagePath":"/src/src/Table%20Extension/TableExt-50101-Item.al"},{"Id":50103,"Kind":17,"Name":"Sales Header Dim","PackagePath":"/src/src/Table%20Extension/TableExt-50103-Sales%20Header.al"}],"Removed":[]}

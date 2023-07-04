@@ -11,12 +11,20 @@ tableextension 50101 "Item Ext" extends Item
         {
             DataClassification = ToBeClassified;
             TableRelation = "Item Heirarchy Master".Code where("Option Type" = const("Category 1"));
+            trigger OnValidate()
+            begin
+                "Item Category Code" := "Category 1";
+            end;
 
         }
         field(50103; "Category 2"; code[30])
         {
             DataClassification = ToBeClassified;
             TableRelation = "Item Heirarchy Master".Code where("Option Type" = const("Category 2"));
+            trigger OnValidate()
+            begin
+                "Description 2" := CopyStr(("Category 1" + ' ' + "Category 2"), 1, 50);
+            end;
         }
         field(50104; "Category 3"; code[30])
         {

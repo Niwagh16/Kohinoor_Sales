@@ -68,6 +68,10 @@ xmlport 50101 "Inventory Upload XML"
                 {
                     MinOccurs = Zero;
                 }
+                textelement(GenProdPostGroup)
+                {
+                    MinOccurs = Zero;
+                }
 
                 trigger OnBeforeInsertRecord()
                 var
@@ -102,6 +106,7 @@ xmlport 50101 "Inventory Upload XML"
                     ItemJnlLine.VALIDATE("Shortcut Dimension 1 Code", ShortCodeDim1);
                     ItemJnlLine.VALIDATE("Shortcut Dimension 2 Code", ShortCodeDim2);
                     ItemJnlLine.VALIDATE("Bin Code", BinCode);
+                    ItemJnlLine.Validate("Gen. Prod. Posting Group", GenProdPostGroup);
 
                     QTY := DELCHR(QTY, '=', '"');
                     EVALUATE(Amt, QTY);
