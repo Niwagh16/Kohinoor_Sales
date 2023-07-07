@@ -63,6 +63,7 @@ codeunit 50101 "Event & Subs"
                         IJRD.Amount := ItemJou.Amount;
                         IJRD."Bin Code" := ItemJou."Bin Code";
                         IJRD."External Document No." := ItemJou."External Document No.";
+                        IJRD."Replacement Remarks" := ItemJou."Replacement Remarks";
                         IJRD."Entry Posted" := true;
                         IJRD.Insert();
                     end;
@@ -97,6 +98,7 @@ codeunit 50101 "Event & Subs"
                         IJRD.Amount := ItemJou.Amount;
                         IJRD."Bin Code" := ItemJou."Bin Code";
                         IJRD."External Document No." := ItemJou."External Document No.";
+                        IJRD."Replacement Remarks" := ItemJou."Replacement Remarks";
                         IJRD."Entry Posted" := true;
                         IJRD.Insert();
                     end;

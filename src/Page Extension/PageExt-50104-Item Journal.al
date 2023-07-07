@@ -2,6 +2,15 @@ pageextension 50104 "Item Journal Ext" extends "Item Journal"
 {
     layout
     {
+        addafter("Shortcut Dimension 2 Code")
+        {
+
+            field("Replacement Remarks"; Rec."Replacement Remarks")
+            {
+                ApplicationArea = All;
+                ToolTip = 'Specifies the value of the Replacement Remarks field.';
+            }
+        }
     }
 
     actions

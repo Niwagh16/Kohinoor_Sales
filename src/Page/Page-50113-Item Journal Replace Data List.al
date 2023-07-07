@@ -75,6 +75,10 @@ page 50113 "Item Journal Replace Data List"
                 {
                     ToolTip = 'Specifies the value of the Shortcut Dimension 2 Code field.';
                 }
+                field("Replacement Remarks"; Rec."Replacement Remarks")
+                {
+                    ToolTip = 'Specifies the value of the Replacement Remarks field.';
+                }
                 field("Entry Posted"; Rec."Entry Posted")
                 {
                     ToolTip = 'Specifies the value of the Entry Posted field.';

@@ -82,6 +82,10 @@ table 50106 "Item Journal Replace Data"
         {
             DataClassification = ToBeClassified;
         }
+        field(17; "Replacement Remarks"; Text[100])
+        {
+            DataClassification = ToBeClassified;
+        }
     }
     keys
     {

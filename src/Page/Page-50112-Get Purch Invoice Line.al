@@ -351,9 +351,14 @@ page 50112 "Get Purch Inv Lines"
         Text000: Label 'Lines Counting to ------ #1';
         ItemJ: Record "Item Journal Line";
         GLS: Record "General Ledger Setup";
+        Batch: Record 233;
     begin
         GLS.Get();
         GLS.TestField("Item Journal Batch for Purch.");
+        Batch.Reset();
+        Batch.SetRange("Journal Template Name", 'ITEM');
+        Batch.SetRange(Name, GLS."Item Journal Batch for Purch.");
+        if Batch.FindFirst() then;
         LineCount := 0;
         Window.Open(Text000, LineCount);
         IF PurchInvLine.FindSet() then
@@ -382,6 +387,8 @@ page 50112 "Get Purch Inv Lines"
                 ItemGenJnl.Validate("Unit of Measure Code", PurchInvLine."Unit of Measure Code");
                 ItemGenJnl.Validate("Shortcut Dimension 1 Code", PurchInvLine."Shortcut Dimension 1 Code");
                 ItemGenJnl.Validate("Shortcut Dimension 2 Code", PurchInvLine."Shortcut Dimension 2 Code");
+                ItemGenJnl."Reason Code" := GLS."Item Journal Batch for Sales";
+                ItemGenJnl.Validate("Posting No. Series", Batch."Posting No. Series");
                 ItemGenJnl.insert;
                 // InsertTrackingSpecification(SalInvLine, ItemGenJnl); //For Create Tracking Specifications in Item Journal
                 //*********************Negative Adjust Entry Creation******************************
@@ -407,6 +414,8 @@ page 50112 "Get Purch Inv Lines"
                 ItemGenJnl.Validate("Unit of Measure Code", PurchInvLine."Unit of Measure Code");
                 ItemGenJnl.Validate("Shortcut Dimension 1 Code", PurchInvLine."Shortcut Dimension 1 Code");
                 ItemGenJnl.Validate("Shortcut Dimension 2 Code", PurchInvLine."Shortcut Dimension 2 Code");
+                ItemGenJnl."Reason Code" := GLS."Item Journal Batch for Sales";
+                ItemGenJnl.Validate("Posting No. Series", Batch."Posting No. Series");
                 ItemGenJnl.insert;
                 InsertTrackingSpecification(PurchInvLine, ItemGenJnl); //For Create Tracking Specifications in Item Journal
             until PurchInvLine.Next() = 0;

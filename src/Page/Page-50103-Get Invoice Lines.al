@@ -321,9 +321,14 @@ page 50103 "Get Invoice Lines"
         Text000: Label 'Lines Counting to ------ #1';
         ItemJ: Record "Item Journal Line";
         GLS: Record "General Ledger Setup";
+        Batch: Record 233;
     begin
         GLS.Get();
         GLS.TestField("Item Journal Batch for Sales");
+        Batch.Reset();
+        Batch.SetRange("Journal Template Name", 'ITEM');
+        Batch.SetRange(Name, GLS."Item Journal Batch for Sales");
+        if Batch.FindFirst() then;
         LineCount := 0;
         Window.Open(Text000, LineCount);
         IF SalInvLine.FindSet() then
@@ -333,6 +338,7 @@ page 50103 "Get Invoice Lines"
                 ItemGenJnl.init;
                 ItemGenJnl."Journal Template Name" := 'ITEM';
                 ItemGenJnl."Journal Batch Name" := GLS."Item Journal Batch for Sales";
+
                 ItemJ.Reset();
                 ItemJ.SetRange("Journal Template Name", 'ITEM');
                 ItemJ.SetRange("Journal Batch Name", GLS."Item Journal Batch for Sales");
@@ -353,6 +359,7 @@ page 50103 "Get Invoice Lines"
                 ItemGenJnl.Validate("Shortcut Dimension 1 Code", SalInvLine."Shortcut Dimension 1 Code");
                 ItemGenJnl.Validate("Shortcut Dimension 2 Code", SalInvLine."Shortcut Dimension 2 Code");
                 ItemGenJnl."Reason Code" := GLS."Item Journal Batch for Sales";
+                ItemGenJnl.Validate("Posting No. Series", Batch."Posting No. Series");
                 ItemGenJnl.insert;
                 InsertTrackingSpecification(SalInvLine, ItemGenJnl); //For Create Tracking Specifications in Item Journal
                 //*********************Negative Adjust Entry Creation******************************
@@ -379,6 +386,7 @@ page 50103 "Get Invoice Lines"
                 ItemGenJnl.Validate("Shortcut Dimension 1 Code", SalInvLine."Shortcut Dimension 1 Code");
                 ItemGenJnl.Validate("Shortcut Dimension 2 Code", SalInvLine."Shortcut Dimension 2 Code");
                 ItemGenJnl."Reason Code" := GLS."Item Journal Batch for Sales";
+                ItemGenJnl.Validate("Posting No. Series", Batch."Posting No. Series");
                 ItemGenJnl.insert;
             until SalInvLine.Next() = 0;
         Window.Close();

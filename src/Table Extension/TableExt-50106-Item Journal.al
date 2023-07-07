@@ -2,6 +2,10 @@ tableextension 50106 "Item Journal Dim" extends "Item Journal Line"
 {
     fields
     {
+        field(50101; "Replacement Remarks"; Text[100])
+        {
+            DataClassification = ToBeClassified;
+        }
         modify("Location Code")
         {
             trigger OnAfterValidate()
