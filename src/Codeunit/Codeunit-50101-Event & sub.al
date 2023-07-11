@@ -49,7 +49,7 @@ codeunit 50101 "Event & Subs"
 
                         IJRD.Init();
                         IJRD."Entry No." := Entryno + 1;
-                        IJRD."Document No." := ItemJou."Document No.";
+                        IJRD."Document No." := ItemJournalLine."Document No.";
                         IJRD."Entry Type" := ItemJou."Entry Type";
                         IJRD."Item No." := ItemJou."Item No.";
                         IJRD.Description := ItemJou.Description;
@@ -84,7 +84,7 @@ codeunit 50101 "Event & Subs"
 
                         IJRD.Init();
                         IJRD."Entry No." := Entryno + 1;
-                        IJRD."Document No." := ItemJou."Document No.";
+                        IJRD."Document No." := ItemJournalLine."Document No.";
                         IJRD."Entry Type" := ItemJou."Entry Type";
                         IJRD."Item No." := ItemJou."Item No.";
                         IJRD.Description := ItemJou.Description;

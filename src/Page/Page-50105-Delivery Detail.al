@@ -80,6 +80,7 @@ page 50105 "Delivery Detail"
                 trigger OnAction()
                 var
                 begin
+                    Rec.TestField("Delivery Date");
                     IF Confirm('Do you want to post the order', true) then
                         PostOrder(Rec);
                 end;
@@ -120,6 +121,7 @@ page 50105 "Delivery Detail"
                 until DelLine.Next() = 0;
         end;
         Message('Entry Posted......');
+        DelHdr.Delete(true);
         if InstructionMgt.IsEnabled(InstructionMgt.ShowPostedConfirmationMessageCode()) then
             ShowPostedConfirmationMessage(PostedDL."Delivery Challan No.");
         CurrPage.Close();
