@@ -86,4 +86,36 @@ page 50113 "Item Journal Replace Data List"
             }
         }
     }
+    actions
+    {
+        area(Processing)
+        {
+
+            action(Test)
+            {
+                // Visible = true;
+                // Caption = 'Report';
+
+                // PromotedCategory = Process;
+                // PromotedIsBig = true;
+                // Promoted = true;
+                // PromotedOnly = true;
+                ApplicationArea = all;
+                trigger OnAction
+                ()
+                var
+                    myInt: Integer;
+                begin
+                    //message('hi');
+
+                end;
+
+
+            }
+
+
+
+        }
+    }
+
 }

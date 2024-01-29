@@ -443,7 +443,7 @@ page 50112 "Get Purch Inv Lines"
                     ReservEntryInit."Entry No." := ReservEntry."Entry No." + 1;
                     ReservEntryInit."Item No." := ItemGenJnl."Item No.";
                     ReservEntryInit."Location Code" := ItemGenJnl."Location Code";
-                    ReservEntryInit.validate("Quantity (Base)", PurchInvLine.Quantity);
+                    ReservEntryInit.validate("Quantity (Base)", ILE.Quantity);
                     ReservEntryInit."Reservation Status" := ReservEntryInit."Reservation Status"::Prospect;
                     ReservEntryInit."Source Type" := DATABASE::"Item Journal Line";
                     ReservEntryInit."Source Subtype" := 2;

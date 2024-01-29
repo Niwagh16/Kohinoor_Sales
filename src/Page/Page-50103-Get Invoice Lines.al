@@ -413,7 +413,7 @@ page 50103 "Get Invoice Lines"
                     ReservEntryInit."Entry No." := ReservEntry."Entry No." + 1;
                     ReservEntryInit."Item No." := ItemGenJnl."Item No.";
                     ReservEntryInit."Location Code" := ItemGenJnl."Location Code";
-                    ReservEntryInit.validate("Quantity (Base)", SalInvLine.Quantity);
+                    ReservEntryInit.validate("Quantity (Base)", abs(ILE.Quantity));
                     ReservEntryInit."Reservation Status" := ReservEntryInit."Reservation Status"::Prospect;
                     ReservEntryInit."Source Type" := DATABASE::"Item Journal Line";
                     ReservEntryInit."Source Subtype" := 2;

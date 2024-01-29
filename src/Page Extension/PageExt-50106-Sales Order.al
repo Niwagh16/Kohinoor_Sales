@@ -14,6 +14,7 @@ pageextension 50106 Sales_Order_Ext extends "Sales Order"
             {
                 Caption = 'Sales Order';
                 Promoted = true;
+                //PromotedCategory = Report;
                 Image = Print;
                 ApplicationArea = all;
                 trigger OnAction()
@@ -27,6 +28,8 @@ pageextension 50106 Sales_Order_Ext extends "Sales Order"
                     // SH.Modify();
                 end;
             }
+
+
         }
         // Add changes to page actions here
     }

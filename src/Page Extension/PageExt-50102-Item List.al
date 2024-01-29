@@ -14,11 +14,11 @@ pageextension 50102 "Item List Ext" extends "Item List"
         addafter(Description)
         {
 
-            field("Description 2"; Rec."Description 2")
-            {
-                ApplicationArea = All;
-                ToolTip = 'Specifies the value of the Description 2 field.';
-            }
+            // field("Description 2"; Rec."Description 2")
+            // {
+            //     ApplicationArea = All;
+            //     ToolTip = 'Specifies the value of the Description 2 field.';
+            // }
         }
         addafter("Vendor No.")
         {

@@ -1,4 +1,4 @@
-pageextension 50108 Posted_SalesCr_Memo_Ext extends "Posted Sales Credit Memo"
+pageextension 50108 Posted_Sales_Credit_Ext extends "Posted Sales Credit Memo"
 {
     layout
     {
@@ -14,6 +14,7 @@ pageextension 50108 Posted_SalesCr_Memo_Ext extends "Posted Sales Credit Memo"
                 ApplicationArea = all;
                 Image = Print;
                 Promoted = true;
+                PromotedCategory = Report;
 
                 trigger OnAction()
                 var
